@@ -1,0 +1,19 @@
+{
+  "name": "esiio",
+  "version": "1.0.0",
+  "description": "ESI Interface Operator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["eve", "eve online", "ESI"],
+  "author": "Erin Rivas",
+  "license": "MIT",
+  "dependencies": {
+    "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
+  }
+}
