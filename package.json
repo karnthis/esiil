@@ -4,7 +4,8 @@
   "description": "ESI Interface Operator",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "trial": "node ./attempt.js"
   },
   "keywords": ["eve", "eve online", "ESI"],
   "author": "Erin Rivas",
