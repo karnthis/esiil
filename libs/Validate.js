@@ -18,11 +18,9 @@ function CacheMode(s) {
 
 
 module.exports = {
-  
   IsString,
   URL,
   Version,
   Source,
   CacheMode
-
 } 

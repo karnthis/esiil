@@ -1,6 +1,7 @@
 const { getRequest, postRequest } = require('./libs/Requests')
 
 const Core = require('./libs/Core')
+const { Icons } = require('./classes/Groups')
 
 // import { Core } from './libs/Core'
 // import { Tmp } from './libs/authtmp'
@@ -18,15 +19,54 @@ const Core = require('./libs/Core')
 
 
 module.exports = class Main extends Core {
-  constructor() {
-    super({})
-    // this.test = new Tmp()
-    // this.images = new Icons({})
+  constructor(cfg = {}) {
+    const { base, ver, src, cb, clientID, clientSecret, scope } = cfg
+    super({ base, ver, src })
+
+    this.callbackURL = cb
+    this.clientID = clientID
+    this.clientSecret = clientSecret
+    this.images = new Icons({})
+    this.masterScopes = scope || []
   }
 
   // **** UTIL FUNCTIONS **** \\
-
-
+  buildRequestURL(scopes = []) {
+    const useScope = (this.masterScopes.length > 0) ? this.masterScopes : scopes
+    return [`${this.baseURL}/oauth/authorize/?response_type=code`,
+    `redirect_uri=${encodeURI(this.callbackURL)}`,
+    `client_id=${this.clientID}`,
+    `scope=${useScope.join(' ')}`].join('&')
+  }
+  setScope(scopes = []) {
+    this.masterScopes = scopes
+  }
+  getTokens(authToken = '') {
+    const options = {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      auth: `${this.clientID}:${this.clientSecret}`
+    }
+    const payload = JSON.stringify({
+        "grant_type":"authorization_code",
+        "code":authToken
+      })
+    return this.tokenPost(options, payload)
+  }
+  refreshTokens(refreshToken = '') {
+    const options = {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      auth: `${this.clientID}:${this.clientSecret}`
+    }
+    const payload = JSON.stringify({
+        "grant_type":"refresh_token",
+        "code":refreshToken
+      })
+    return this.tokenPost(options, payload)
+  }
 
   // **** END UTIL FUNCTIONS **** \\
 

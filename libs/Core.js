@@ -2,7 +2,7 @@ const { getRequest, postRequest } = require('./Requests')
 
 module.exports =  class Core {
   constructor(cfg = {}) {
-    this.baseURL = cfg.url || 'https://esi.evetech.net/' // should not be overrode
+    this.baseURL = cfg.base || 'https://esi.evetech.net/' // should not be overrode
     this.version = cfg.ver || 'latest/' // latest || dev || legacy
     this.source = cfg.src || 'tranquility' // tranquility || singularity
     // this.cacheMode = 'sql' // sqlDisk || sqlMemory
@@ -29,6 +29,9 @@ module.exports =  class Core {
       path = path.slice(1)
     }
     return getRequest(`${this.urlPt1}${path}${this.urlPt2}`,{})
+  }
+  tokenPost(options = {}, payload = '') {
+    return postRequest(`https://login.eveonline.com/oauth/token`, options, payload)
   }
   // **** END FUNCTIONS **** \\
 
