@@ -1,3 +1,5 @@
 node_modules/
-attempt.js
 data/
+esiio_db/
+
+attempt.js

@@ -23,12 +23,14 @@ module.exports = {
     })
   },
 
-  postRequest(url, options, payload) {
-    options.method = 'POST'
+  allRequest(url, options, payload) {
     return new Promise((resolve, reject) => {
       if (URL(url)) {
         console.log(url)
         const req = request(url, options, (res) => {
+          console.dir('req.getHeaders')
+          console.dir(req.getHeaders())
+          console.dir('end req.getHeaders')
           res.setEncoding('utf8');
           const resBody = []
           const status = res.statusCode
@@ -36,7 +38,7 @@ module.exports = {
             resBody.push(data)
           })
           res.on('end', () => {
-            console.dir(resBody)
+            // console.dir(resBody)
             resolve({
               body: JSON.parse(resBody.join()),
               status

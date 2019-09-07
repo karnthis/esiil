@@ -3,24 +3,25 @@ const FS = require('fs')
 const SQLite = require('sqlite3')
 
 module.exports = class SQLEngine {
-  constructor(mode) {
-    if (!FS.existsSync('./data/test.sqlite')) {
+  constructor(cfg = {}) {
+    const { dbPath = './esiio_db/', dbName = 'main.sqlite' } = cfg
+    if (!FS.existsSync(`${dbPath}${dbName}`)) {
       // console.log('not exists')
-      FS.mkdirSync('./data', { recursive: true });
-      FS.writeFileSync('./data/test.sqlite', '', { flag: 'wx' }, function (err) {
+      FS.mkdirSync(`${dbPath}`, { recursive: true });
+      FS.writeFileSync(`${dbPath}${dbName}`, '', { flag: 'wx' }, function (err) {
         if (err) console.error(err);
       })
     } else {
       // console.log('exists')
     }
     const { Database } = SQLite.verbose()
-    if (false && mode == 'memory') {
+    if (false && cfg.mode == 'memory') {
       this.db = new Database(':memory:', (err) => {
         if (err) return console.error(err.message);
         else console.log('Connected to the in-memory SQLite database.');
       })
     } else {
-      this.db = new Database('./data/test.sqlite', (err) => {
+      this.db = new Database(`${dbPath}${dbName}`, (err) => {
         if (err) return console.error(err.message);
         else console.log('Connected to the on-disk SQLite database.');
       })
@@ -30,17 +31,57 @@ module.exports = class SQLEngine {
 
   initDB() {
     this.db.serialize(() => {
-      // this.db.run("CREATE TABLE IF NOT EXISTS test_cache (path TEXT, res BLOB, stamp NUMBER)")
-      // this.db.run("CREATE TABLE IF NOT EXISTS configs (key TEXT NOT NULL, value BLOB NOT NULL, stamp NUMBER)")
-      this.db.run("CREATE TABLE IF NOT EXISTS users (toon_name TEXT NOT NULL, char_id NUMBER NOT NULL, access_token TEXT NOT NULL, expires NUMBER NOT NULL, refresh_token TEXT NOT NULL, scope TEXT)")
-      this.db.run("CREATE TABLE IF NOT EXISTS scopes (scope_id NUMBER NOT NULL, scope_value TEXT NOT NULL)")
+      // this.db.run("CREATE TABLE IF NOT EXISTS test_cache (path TEXT, res BLOB, stamp INTEGER)")
+      // this.db.run("CREATE TABLE IF NOT EXISTS configs (key TEXT NOT NULL, value BLOB NOT NULL, stamp INTEGER)")
+      this.db.run("CREATE TABLE IF NOT EXISTS users (char_id BIGINT NOT NULL PRIMARY KEY, toon_name TEXT NOT NULL, access_token TEXT NOT NULL, expires INTEGER NOT NULL, refresh_token TEXT NOT NULL, scope TEXT)")
+      this.db.run("CREATE TABLE IF NOT EXISTS scopes (scope_id INTEGER NOT NULL, scope_value TEXT NOT NULL)")
       this.db.run(scopeSQL)
     })
-    this.db.close((err) => {
-      if (err) return console.error(err.message)
-    })
+    // this.db.close((err) => {
+    //   if (err) return console.error(err.message)
+    // })
   }
 
+  saveNewToken(data) {
+    const { CharacterName, CharacterID, access_token, expiration, refresh_token, Scopes } = data
+    const sql = 'REPLACE INTO users (toon_name, char_id, access_token, expires, refresh_token, scope) VALUES (?,?,?,?,?,?)'
+    this.db.run(sql, [
+      CharacterName,
+      CharacterID,
+      access_token,
+      expiration,
+      refresh_token,
+      Scopes
+    ], err => console.error(err));
+  }
+  saveRefreshedToken(access, refresh) {
+    const sql = 'UPDATE users SET access_token = ? WHERE refresh_token = ?'
+    this.db.run(sql, [access, refresh], err => console.error(err));
+  }
+  toon2token(toonID) {
+    // let ret = ''
+    return this.db.get('SELECT access_token, expires, refresh_token FROM users WHERE char_id = ?', [ toonID ], (err, row) => {
+      console.log('row')
+      console.dir(row)
+      console.log('end row')
+      return row
+    })
+    // console.log('ret')
+    // console.log(ret)
+    // return ret
+  }
+
+  toon2token2(toonID) {
+    return new Promise((resolve, reject) => {
+      this.db.get('SELECT access_token, expires, refresh_token FROM users WHERE char_id = ?', [ toonID ], (err, row) => {
+        if (err) reject(new Error(err))
+        console.log('row')
+        console.dir(row)
+        console.log('end row')
+        return resolve(row)
+      })
+    })
+  }
 }
 
 const scopeSQL = `INSERT INTO scopes (scope_id, scope_value)
