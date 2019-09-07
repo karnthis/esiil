@@ -2,6 +2,9 @@
 function IsString(s) {
   return typeof s === 'string';
 }
+function isInt(s) {
+  return !isNaN(Number(s))
+}
 function URL(s) {
   return (IsString(s) && /^https?:\/\//.test(s));
 }
@@ -22,5 +25,6 @@ module.exports = {
   URL,
   Version,
   Source,
-  CacheMode
+  CacheMode,
+  isInt
 } 

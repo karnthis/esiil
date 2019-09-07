@@ -1,7 +1,6 @@
-const { getRequest, postRequest } = require('./libs/Requests')
-
 const Core = require('./libs/Core')
 const { Icons } = require('./classes/Groups')
+const SQLEngine = require('./libs/Database')
 
 // import { Core } from './libs/Core'
 // import { Tmp } from './libs/authtmp'
@@ -20,19 +19,28 @@ const { Icons } = require('./classes/Groups')
 
 module.exports = class Main extends Core {
   constructor(cfg = {}) {
-    const { base, ver, src, cb, clientID, clientSecret, scope } = cfg
+    const { base, ver, src, cb, clientID, clientSecret, scope, dbMode } = cfg
     super({ base, ver, src })
 
     this.callbackURL = cb
     this.clientID = clientID
     this.clientSecret = clientSecret
-    this.images = new Icons({})
     this.masterScopes = scope || []
+
+    this.images = new Icons({})
+    this.database = new SQLEngine(dbMode)
   }
 
   // **** UTIL FUNCTIONS **** \\
+  tokenPost(options = {}, payload = '') {
+    return postRequest(`https://login.eveonline.com/oauth/token`, options, payload)
+  }
+  
+
+
   buildRequestURL(scopes = []) {
     const useScope = (this.masterScopes.length > 0) ? this.masterScopes : scopes
+    if (useScope.length == 0) throw new Error('must have at least 1 scope selected')
     return [`${this.baseURL}/oauth/authorize/?response_type=code`,
     `redirect_uri=${encodeURI(this.callbackURL)}`,
     `client_id=${this.clientID}`,
@@ -54,7 +62,7 @@ module.exports = class Main extends Core {
       })
     return this.tokenPost(options, payload)
   }
-  refreshTokens(refreshToken = '') {
+  refreshToken(refreshToken = '') {
     const options = {
       headers: {
         'Content-Type': 'application/json'
