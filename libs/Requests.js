@@ -24,6 +24,9 @@ module.exports = {
     options.headers = options.headers || {}
     options.headers['User-Agent'] = data.userAgent
     return allRequest(url, options, payload)
+  },
+  sendTokenRequest(url, options = {}) {
+    return allRequest(url, options)
   }
 
 

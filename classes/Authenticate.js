@@ -1,5 +1,8 @@
 const Core = require('../libs/Core')
 const { nowInSeconds, tokenExchange } = require('../libs/Misc')
+const { sendTokenRequest } = require('../libs/Requests')
+
+
 
 module.exports = class Authenticate extends Core {
   constructor(cfg = {}) {
@@ -52,7 +55,7 @@ module.exports = class Authenticate extends Core {
         console.error(err)
         throw new Error(err)
       })
-    const { CharacterID, CharacterName, Scopes } = await tokenVerify(access_token)
+    const { CharacterID, CharacterName, Scopes } = await tokenVerify(access_token, this.userAgent)
     .then(res => {
       // console.dir(res)
       return res.body
@@ -70,19 +73,14 @@ module.exports = class Authenticate extends Core {
 
 
 
-function tokenGet(path, options = {}) {
-  options.headers = options.headers || {}
-  options.headers['User-Agent'] = this.userAgent
-  return getRequest(path, options)
-}
-
-function tokenVerify(accessToken) {
+function tokenVerify(accessToken, userAgent) {
   const options = {
     headers: {
+      'User-Agent': userAgent,
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${accessToken}`
     },
   }
-  return tokenGet(`https://login.eveonline.com/oauth/verify`, options)
+  return sendTokenRequest(`https://login.eveonline.com/oauth/verify`, options)
 }
 

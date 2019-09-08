@@ -18,6 +18,9 @@ module.exports = class Alliance extends Core {
   memberCorps(alliance_id) {
     return this.makePublicGet(`${basePath}/${alliance_id}/corporations/`)
   }
+  images(alliance_id) {
+    return this.makePublicGet(`${basePath}/${alliance_id}/icons/`)
+  }
 
   // RESTRICTED
 

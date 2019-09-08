@@ -15,14 +15,17 @@ module.exports = class Character extends Core {
   corpHistory(character_id) {
     return this.makePublicGet(`${basePath}/${character_id}/corporationhistory/`)
   }
+  images(character_id) {
+    return this.makePublicGet(`${basePath}/${character_id}/portrait/`)
+  }
   // TODO	make post
   xcharacterzz(character_id) {
     return this.makePublicGet(`${basePath}/${character_id}/`)
   }
 
   // RESTRICTED
-  medals(character_id, toonID) {
-    return this.makeAuthedGet(`${basePath}/${character_id}/medals/`, toonID)
+  assets(character_id, toonID) {
+    return this.makeAuthedGet(`${basePath}/${character_id}/assets/`, toonID)
   }
   clones(character_id, toonID) {
     return this.makeAuthedGet(`${basePath}/${character_id}/clones/`, toonID)
@@ -36,6 +39,9 @@ module.exports = class Character extends Core {
   // TODO ?
   lp(character_id, toonID) {
     return this.makeAuthedGet(`${basePath}/${character_id}/loyalty/points/`, toonID)
+  }
+  medals(character_id, toonID) {
+    return this.makeAuthedGet(`${basePath}/${character_id}/medals/`, toonID)
   }
   opportunities(character_id, toonID) {
     return this.makeAuthedGet(`${basePath}/${character_id}/opportunities/`, toonID)

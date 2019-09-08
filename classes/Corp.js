@@ -1,23 +1,25 @@
 const Core = require('../libs/Core')
 
-const basePath = 'ddd'
+const basePath = 'corporations'
 
-module.exports = class ddd extends Core {
+module.exports = class Corp extends Core {
   constructor(cfg = {}) {
     /* cfg == { base, ver, src, agent, db, clientID, clientSecret } */
     super(cfg)
   }
 
   // PUBLIC
-  corp(corporation_id) {
-    return this.makePublicGet(`corporations/${corporation_id}/`)
+  one(corporation_id) {
+    return this.makePublicGet(`${basePath}/${corporation_id}/`)
   }
-  corpAllianceHistory(corporation_id) {
-    return this.makePublicGet(`corporations/${corporation_id}/alliancehistory/`)
+  allianceHistory(corporation_id) {
+    return this.makePublicGet(`${basePath}/${corporation_id}/alliancehistory/`)
   }
-  //TODO	better name
-  allNPCCorps() {
-    return this.makePublicGet(`corporations/npccorps/`)
+  images(corporation_id) {
+    return this.makePublicGet(`${basePath}/${corporation_id}/icons/`)
+  }
+  npcs() {
+    return this.makePublicGet(`${basePath}/npccorps/`)
   }
 
   // RESTRICTED
