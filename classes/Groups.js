@@ -1,6 +1,6 @@
 const Core = require('../libs/Core')
 
-class Icons extends Core {
+class Image extends Core {
   alliance(alliance_id) {
     return this.basicPublicGet(`alliances/${alliance_id}/icons/`)
   }
@@ -13,5 +13,5 @@ class Icons extends Core {
 }
 
 module.exports = {
-  Icons
+  Image
 }

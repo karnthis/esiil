@@ -3,17 +3,17 @@ const { nowInSeconds, tokenExchange } = require('../libs/Misc')
 
 module.exports = class Authenticate extends Core {
   constructor(cfg = {}) {
-    const { base, ver, src, agent, db, cb, clientID, clientSecret, scope } = cfg
+    const { base, ver, src, agent, db, cbPath, clientID, clientSecret, scope } = cfg
     super({ base, ver, src, agent, db, clientID, clientSecret })
 
-    this.callbackURL = cb
+    this.callbackURL = cbPath
     this.clientID = clientID
     this.clientSecret = clientSecret
     this.masterScopes = scope || []
 
     
   }
-  exportSettings() {
+  share() {
     return {
       base: this.baseURL,
       ver: this.version,
