@@ -31,13 +31,18 @@ module.exports = class Authenticate extends Core {
   buildRequestURL(scopes = []) {
     const useScope = (this.masterScopes.length > 0) ? this.masterScopes : scopes
     if (useScope.length == 0) throw new Error('must have at least 1 scope selected')
-    return [`${this.baseURL}/oauth/authorize/?response_type=code`,
+    return [`https://login.eveonline.com/oauth/authorize/?response_type=code`,
     `redirect_uri=${encodeURI(this.callbackURL)}`,
     `client_id=${this.clientID}`,
     `scope=${useScope.join(' ')}`].join('&')
   }
-  setScope(scopes = []) {
-    this.masterScopes = scopes
+  async setScope(scopes = []) {
+    if (scopes == 'all') {
+      this.masterScopes = await this.db.getAllScopes()
+      // console.log(this.masterScopes)
+    } else {
+      this.masterScopes = scopes
+    }
   }
 
   async processAuthToken(authToken = '') {

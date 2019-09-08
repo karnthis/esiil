@@ -27,6 +27,14 @@ module.exports = class Character extends Core {
   assets(character_id, toonID) {
     return this.makeAuthedGet(`${basePath}/${character_id}/assets/`, toonID)
   }
+  //TODO make post
+  assetLocations(character_id, itemArray, toonID) {
+    return this.makeAuthedPost(`${basePath}/${character_id}/assets/locations/`, itemArray, toonID)
+  }
+  //TODO make post
+  assetNames(character_id, itemArray, toonID) {
+    return this.makeAuthedPost(`${basePath}/${character_id}/assets/names/`, itemArray, toonID)
+  }
   clones(character_id, toonID) {
     return this.makeAuthedGet(`${basePath}/${character_id}/clones/`, toonID)
   }
@@ -36,7 +44,6 @@ module.exports = class Character extends Core {
   implants(character_id, toonID) {
     return this.makeAuthedGet(`${basePath}/${character_id}/implants/`, toonID)
   }
-  // TODO ?
   lp(character_id, toonID) {
     return this.makeAuthedGet(`${basePath}/${character_id}/loyalty/points/`, toonID)
   }

@@ -31,6 +31,9 @@ module.exports = class Core {
   makePublicGet(path) {
     return basicGet(path, this.dataPack)
   }
+  makePublicPost(path) {
+    return sendPathRequest(path, {}, payload, this.dataPack)
+  }
 
   async findToken(toonID) {
     let { access_token, expires, refresh_token } = await this.db.toon2token2(toonID)
@@ -54,6 +57,17 @@ module.exports = class Core {
       },
     }
     return sendPathRequest(path, options, this.dataPack)
+  }
+  async makeAuthedPost(path, toonID, payload) {
+    const access_token = await this.findToken(toonID)
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`
+      },
+    }
+    return sendPathRequest(path, options, this.dataPack, payload)
   }
   async refreshToken(refreshToken = '') {
     const expiration = nowInSeconds()

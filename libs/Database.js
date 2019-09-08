@@ -34,7 +34,7 @@ module.exports = class SQLEngine {
       // this.db.run("CREATE TABLE IF NOT EXISTS test_cache (path TEXT, res BLOB, stamp INTEGER)")
       // this.db.run("CREATE TABLE IF NOT EXISTS configs (key TEXT NOT NULL, value BLOB NOT NULL, stamp INTEGER)")
       this.db.run("CREATE TABLE IF NOT EXISTS users (char_id BIGINT NOT NULL PRIMARY KEY, toon_name TEXT NOT NULL, access_token TEXT NOT NULL, expires INTEGER NOT NULL, refresh_token TEXT NOT NULL, scope TEXT)")
-      this.db.run("CREATE TABLE IF NOT EXISTS scopes (scope_id INTEGER NOT NULL, scope_value TEXT NOT NULL)")
+      this.db.run("CREATE TABLE IF NOT EXISTS scopes (scope_id INTEGER NOT NULL PRIMARY KEY, scope_value TEXT NOT NULL)")
       this.db.run(scopeSQL)
     })
     // this.db.close((err) => {
@@ -75,16 +75,31 @@ module.exports = class SQLEngine {
     return new Promise((resolve, reject) => {
       this.db.get('SELECT access_token, expires, refresh_token FROM users WHERE char_id = ?', [ toonID ], (err, row) => {
         if (err) reject(new Error(err))
-        console.log('row')
-        console.dir(row)
-        console.log('end row')
+        // console.log('row')
+        // console.dir(row)
+        // console.log('end row')
         return resolve(row)
       })
     })
   }
+
+  getAllScopes() {
+    return new Promise((resolve, reject) => {
+      const sql = 'SELECT scope_value FROM scopes'
+      this.db.all(sql, [], (err, rows) => {
+        if (err) reject(new Error(err))
+        const data = rows.map(row => row.scope_value)
+        return resolve(data)
+      })
+    })
+    
+  }
+
+
+
 }
 
-const scopeSQL = `INSERT INTO scopes (scope_id, scope_value)
+const scopeSQL = `Replace INTO scopes (scope_id, scope_value)
 VALUES (1, "publicData"),
 (2, "esi-calendar.respond_calendar_events.v1"),
 (3, "esi-calendar.read_calendar_events.v1"),
