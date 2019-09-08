@@ -1,3 +1,5 @@
+const { sendCustomRequest } = require('./Requests')
+
 function nowInSeconds() {return riteMeow()}
 function riteMeow() {
   return Math.round(Date.now() / 1000)

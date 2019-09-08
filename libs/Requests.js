@@ -14,7 +14,7 @@ module.exports = {
     const url = `${data.urlPt1}${cleanURL(path)}${data.urlPt2}`
     return allRequest(url, options)
   },
-  sendPathRequest(path, options = {}, payload = '', data) {
+  sendPathRequest(path, options = {}, data, payload = '') {
     options.headers = options.headers || {}
     options.headers['User-Agent'] = data.userAgent
     const url = `${data.urlPt1}${cleanURL(path)}${data.urlPt2}`
@@ -50,7 +50,17 @@ module.exports = {
   
 }
 
+function cleanURL(s) {
+  while (s.indexOf('/') === 0) {
+    s = s.slice(1)
+  }
+  return s
+}
+
 function allRequest(url, options, payload) {
+  // console.dir(url)
+  // console.dir(options)
+  // console.dir(payload)
   return new Promise((resolve, reject) => {
     if (URL(url)) {
       console.log(url)
@@ -61,6 +71,7 @@ function allRequest(url, options, payload) {
         res.setEncoding('utf8');
         const resBody = []
         const status = res.statusCode
+        console.dir(status)
         res.on('data', (data) => {
           resBody.push(data)
         })

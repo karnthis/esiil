@@ -4,18 +4,14 @@ const { nowInSeconds, tokenExchange } = require('../libs/Misc')
 module.exports = class Authenticate extends Core {
   constructor(cfg = {}) {
     const { base, ver, src, agent, db, cb, clientID, clientSecret, scope } = cfg
-    super({ base, ver, src, agent, db })
+    super({ base, ver, src, agent, db, clientID, clientSecret })
 
     this.callbackURL = cb
     this.clientID = clientID
+    this.clientSecret = clientSecret
     this.masterScopes = scope || []
 
-    this.tokenOptions = {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      auth: `${this.clientID}:${clientSecret}`
-    }
+    
   }
   exportSettings() {
     return {
@@ -24,6 +20,8 @@ module.exports = class Authenticate extends Core {
       src: this.source,
       agent: this.userAgent,
       db: this.db,
+      clientID: this.clientID,
+      clientSecret: this.clientSecret
     }
   }
 
