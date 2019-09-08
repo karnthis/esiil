@@ -54,9 +54,9 @@ module.exports = class SQLEngine {
       Scopes
     ], err => console.error(err));
   }
-  saveRefreshedToken(access, refresh) {
-    const sql = 'UPDATE users SET access_token = ? WHERE refresh_token = ?'
-    this.db.run(sql, [access, refresh], err => console.error(err));
+  saveRefreshedToken(access, expiration, refresh) {
+    const sql = 'UPDATE users SET access_token = ?, expires = ? WHERE refresh_token = ?'
+    this.db.run(sql, [access, expiration, refresh], err => console.error(err));
   }
   toon2token(toonID) {
     // let ret = ''
