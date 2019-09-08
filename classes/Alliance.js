@@ -10,16 +10,16 @@ module.exports = class Alliance extends Core {
 
   // PUBLIC
   all() {
-    return this.makePublicGet(`${basePath}/`)
+    return this._makePublicGet(`${basePath}/`)
   }
   one(alliance_id) {
-    return this.makePublicGet(`${basePath}/${alliance_id}`)
+    return this._makePublicGet(`${basePath}/${alliance_id}`)
   }
   memberCorps(alliance_id) {
-    return this.makePublicGet(`${basePath}/${alliance_id}/corporations/`)
+    return this._makePublicGet(`${basePath}/${alliance_id}/corporations/`)
   }
   images(alliance_id) {
-    return this.makePublicGet(`${basePath}/${alliance_id}/icons/`)
+    return this._makePublicGet(`${basePath}/${alliance_id}/icons/`)
   }
 
   // RESTRICTED

@@ -10,10 +10,10 @@ module.exports = class ddd extends Core {
 
   // PUBLIC
   industryFacilities() {
-    return this.makePublicGet(`industry/facilities/`)
+    return this._makePublicGet(`industry/facilities/`)
   }
   industrySystems() {
-    return this.makePublicGet(`industry/systems/`)
+    return this._makePublicGet(`industry/systems/`)
   }
 
   // RESTRICTED

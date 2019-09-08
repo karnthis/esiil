@@ -10,16 +10,16 @@ module.exports = class ddd extends Core {
 
   // PUBLIC
   groups() {
-    return this.makePublicGet(`opportunities/groups/`)
+    return this._makePublicGet(`opportunities/groups/`)
   }
   group(group_id) {
-    return this.makePublicGet(`opportunities/groups/${group_id}/`)
+    return this._makePublicGet(`opportunities/groups/${group_id}/`)
   }
   tasks() {
-    return this.makePublicGet(`opportunities/tasks/`)
+    return this._makePublicGet(`opportunities/tasks/`)
   }
   task(task_id) {
-    return this.makePublicGet(`opportunities/tasks/${task_id}/`)
+    return this._makePublicGet(`opportunities/tasks/${task_id}/`)
   }
 
   // RESTRICTED

@@ -28,27 +28,33 @@ module.exports = class Core {
   }
 
   // **** FUNCTIONS **** \\
-  makePublicGet(path) {
+  _makePublicGet(path) {
     return basicGet(path, this.dataPack)
   }
-  makePublicPost(path) {
-    return sendPathRequest(path, {}, payload, this.dataPack)
+  _makePublicPost(path, payload) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    return sendPathRequest(path, options, this.dataPack, payload)
   }
 
-  async findToken(toonID) {
+  async _findToken(toonID) {
     let { access_token, expires, refresh_token } = await this.db.toon2token2(toonID)
     // console.log('token: ',access_token)
     if (nowInSeconds() >= expires) {
     console.log('refresh hit')
     // console.dir(refresh_token)
-    access_token = await this.refreshToken(refresh_token)
+    access_token = await this._refreshToken(refresh_token)
     }
     // console.log(access_token)
     return access_token
   }
 
-  async makeAuthedGet(path, toonID) {
-    const access_token = await this.findToken(toonID)
+  async _makeAuthedGet(path, toonID) {
+    const access_token = await this._findToken(toonID)
     const options = {
       method: 'GET',
       headers: {
@@ -58,8 +64,8 @@ module.exports = class Core {
     }
     return sendPathRequest(path, options, this.dataPack)
   }
-  async makeAuthedPost(path, toonID, payload) {
-    const access_token = await this.findToken(toonID)
+  async _makeAuthedPost(path, payload, toonID) {
+    const access_token = await this._findToken(toonID)
     const options = {
       method: 'POST',
       headers: {
@@ -69,11 +75,22 @@ module.exports = class Core {
     }
     return sendPathRequest(path, options, this.dataPack, payload)
   }
-  async refreshToken(refreshToken = '') {
+  async _makeAuthedPut(path, payload, toonID) {
+    const access_token = await this._findToken(toonID)
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`
+      },
+    }
+    return sendPathRequest(path, options, this.dataPack, payload)
+  }
+  async _refreshToken(_refreshToken = '') {
     const expiration = nowInSeconds()
     const payload = JSON.stringify({
         "grant_type":"refresh_token",
-        "refresh_token":refreshToken
+        "refresh_token":_refreshToken
       })
     const { access_token, refresh_token } = await tokenExchange(this.tokenOptions, payload, {userAgent: this.userAgent})
       .then(res => res.body)

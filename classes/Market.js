@@ -10,22 +10,22 @@ module.exports = class ddd extends Core {
 
   // PUBLIC
   marketHistory(region_id) {
-    return this.makePublicGet(`markets/${region_id}/history/`)
+    return this._makePublicGet(`markets/${region_id}/history/`)
   }
   marketOrders(region_id) {
-    return this.makePublicGet(`markets/${region_id}/orders/`)
+    return this._makePublicGet(`markets/${region_id}/orders/`)
   }
   marketTypes(region_id) {
-    return this.makePublicGet(`markets/${region_id}/types/`)
+    return this._makePublicGet(`markets/${region_id}/types/`)
   }
   marketGroups() {
-    return this.makePublicGet(`markets/groups/`)
+    return this._makePublicGet(`markets/groups/`)
   }
   marketGroup(market_group_id) {
-    return this.makePublicGet(`markets/groups/${market_group_id}/`)
+    return this._makePublicGet(`markets/groups/${market_group_id}/`)
   }
   marketPrices() {
-    return this.makePublicGet(`markets/prices/`)
+    return this._makePublicGet(`markets/prices/`)
   }
 
   // RESTRICTED

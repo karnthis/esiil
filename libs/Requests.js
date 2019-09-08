@@ -86,6 +86,7 @@ function allRequest(url, options, payload) {
           })
         })
       })
+      // if (payload) req.write(JSON.stringify(payload))
       if (payload) req.write(payload)
       req.on('error', function (err) {
         reject(err)

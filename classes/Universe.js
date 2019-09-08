@@ -10,7 +10,7 @@ module.exports = class ddd extends Core {
 
   // PUBLIC
   piSchematics(schematics_id) {
-    return this.makePublicGet(`universe/schematics/${schematics_id}/`)
+    return this._makePublicGet(`universe/schematics/${schematics_id}/`)
   }
   id2Name(options = {}, payload = []) {
     return this.publicPost(`universe/ids/`, options, JSON.stringify(payload))

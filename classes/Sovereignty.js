@@ -10,13 +10,13 @@ module.exports = class ddd extends Core {
 
   // PUBLIC
   sovereigntyCampaigns() {
-    return this.makePublicGet(`sovereignty/campaigns/`)
+    return this._makePublicGet(`sovereignty/campaigns/`)
   }
   sovereigntyMap() {
-    return this.makePublicGet(`sovereignty/map/`)
+    return this._makePublicGet(`sovereignty/map/`)
   }
   sovereigntyStructures() {
-    return this.makePublicGet(`sovereignty/structures/`)
+    return this._makePublicGet(`sovereignty/structures/`)
   }
 
   // RESTRICTED

@@ -10,27 +10,27 @@ module.exports = class ddd extends Core {
 
   // PUBLIC
   incursions() {
-    return this.makePublicGet(`incursions/`)
+    return this._makePublicGet(`incursions/`)
   }
   insurance() {
-    return this.makePublicGet(`insurance/prices/`)
+    return this._makePublicGet(`insurance/prices/`)
   }
   lpStore(corporation_id) {
-    return this.makePublicGet(`loyalty/stores/${corporation_id}/offers/`)
+    return this._makePublicGet(`loyalty/stores/${corporation_id}/offers/`)
   }
   oneKillmail(killmail_id, killmail_hash) {
-    return this.makePublicGet(`killmails/${killmail_id}/${killmail_hash}/`)
+    return this._makePublicGet(`killmails/${killmail_id}/${killmail_hash}/`)
   }
   route(origin_id, destination_id) {
-    return this.makePublicGet(`route/${origin_id}/${destination_id}/`)
+    return this._makePublicGet(`route/${origin_id}/${destination_id}/`)
   }
   seach() {
-    return this.makePublicGet(`search/`)
+    return this._makePublicGet(`search/`)
   }
   status() {
-    return this.makePublicGet(`status/`)
+    return this._makePublicGet(`status/`)
   }
-  
+
   // RESTRICTED
 
 }

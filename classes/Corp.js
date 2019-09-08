@@ -10,18 +10,32 @@ module.exports = class Corp extends Core {
 
   // PUBLIC
   one(corporation_id) {
-    return this.makePublicGet(`${basePath}/${corporation_id}/`)
+    return this._makePublicGet(`${basePath}/${corporation_id}/`)
   }
   allianceHistory(corporation_id) {
-    return this.makePublicGet(`${basePath}/${corporation_id}/alliancehistory/`)
+    return this._makePublicGet(`${basePath}/${corporation_id}/alliancehistory/`)
   }
   images(corporation_id) {
-    return this.makePublicGet(`${basePath}/${corporation_id}/icons/`)
+    return this._makePublicGet(`${basePath}/${corporation_id}/icons/`)
   }
   npcs() {
-    return this.makePublicGet(`${basePath}/npccorps/`)
+    return this._makePublicGet(`${basePath}/npccorps/`)
   }
 
   // RESTRICTED
-
+  assets(corporation_id, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporation_id}/assets/`, toonID)
+  }
+  assetLocations(corporation_id, itemArray, toonID) {
+    return this._makeAuthedPost(`${basePath}/${corporation_id}/assets/locations/`, JSON.stringify(itemArray), toonID)
+  }
+  assetNames(corporation_id, itemArray, toonID) {
+    return this._makeAuthedPost(`${basePath}/${corporation_id}/assets/names/`, JSON.stringify(itemArray), toonID)
+  }
+  bookmarks(corporation_id, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporation_id}/bookmarks/`, toonID)
+  }
+  bookmarkFolders(corporation_id, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporation_id}/bookmarks/folders/`, toonID)
+  }
 }

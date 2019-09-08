@@ -10,13 +10,13 @@ module.exports = class ddd extends Core {
 
   // PUBLIC
   contractsPublic(region_id) {
-    return this.makePublicGet(`contracts/public/${region_id}/`)
+    return this._makePublicGet(`contracts/public/${region_id}/`)
   }
   contractPublicBids(contract_id) {
-    return this.makePublicGet(`contracts/public/bids/${contract_id}/`)
+    return this._makePublicGet(`contracts/public/bids/${contract_id}/`)
   }
   contractPublicItems(contract_id) {
-    return this.makePublicGet(`contracts/public/items/${contract_id}/`)
+    return this._makePublicGet(`contracts/public/items/${contract_id}/`)
   }
 
   // RESTRICTED
