@@ -70,6 +70,7 @@ module.exports = class Core {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
         'Authorization': `Bearer ${access_token}`
       },
     }
@@ -78,9 +79,22 @@ module.exports = class Core {
   async _makeAuthedPut(path, payload, toonID) {
     const access_token = await this._findToken(toonID)
     const options = {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
+        'Authorization': `Bearer ${access_token}`
+      },
+    }
+    return sendPathRequest(path, options, this.dataPack, payload)
+  }
+  async _makeAuthedDelete(path, payload, toonID) {
+    const access_token = await this._findToken(toonID)
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
         'Authorization': `Bearer ${access_token}`
       },
     }

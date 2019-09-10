@@ -23,5 +23,10 @@ module.exports = class Alliance extends Core {
   }
 
   // RESTRICTED
-
+  contacts(alliance_id, toonID) {
+    return this._makeAuthedGet(`${basePath}/${alliance_id}/contacts/labels/`, toonID)
+  }
+  contactLabels(alliance_id, toonID) {
+    return this._makeAuthedGet(`${basePath}/${alliance_id}/contacts/labels/`, toonID)
+  }
 }

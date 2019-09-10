@@ -9,19 +9,19 @@ module.exports = class ddd extends Core {
   }
 
   // PUBLIC
-  dogmaAttributes() {
+  allAttributes() {
     return this._makePublicGet(`dogma/attributes/`)
   }
-  dogmaAttribute(attribute_id) {
+  oneAttribute(attribute_id) {
     return this._makePublicGet(`dogma/attributes/${attribute_id}/`)
   }
-  dogmaDynamic(type_id, item_id) {
+  dynamic(type_id, item_id) {
     return this._makePublicGet(`dogma/dynamic/items/${type_id}/${item_id}/`)
   }
-  dogmaEffects() {
+  allEffects() {
     return this._makePublicGet(`dogma/effects/`)
   }
-  dogmaEffect(effect_id) {
+  oneEffect(effect_id) {
     return this._makePublicGet(`dogma/effects/${effect_id}/`)
   }
 

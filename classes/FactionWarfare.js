@@ -9,22 +9,22 @@ module.exports = class ddd extends Core {
   }
 
   // PUBLIC
-  fwFactionLeaderboard() {
+  factionLeaderboard() {
     return this._makePublicGet(`fw/leaderboards/`)
   }
-  fwCharacterLeaderboard() {
+  characterLeaderboard() {
     return this._makePublicGet(`fw/leaderboards/characters/`)
   }
-  fwCorporationLeaderboard() {
+  corporationLeaderboard() {
     return this._makePublicGet(`fw/leaderboards/corporations/`)
   }
-  fwStats() {
+  stats() {
     return this._makePublicGet(`fw/stats/`)
   }
-  fwSystems() {
+  systems() {
     return this._makePublicGet(`fw/systems/`)
   }
-  fwWars() {
+  wars() {
     return this._makePublicGet(`fw/wars/`)
   }
 
