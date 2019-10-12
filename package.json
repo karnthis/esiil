@@ -1,20 +1,27 @@
 {
   "name": "esiio",
-  "version": "1.0.0",
-  "description": "ESI Interface Operator",
+  "version": "0.1.0",
+  "description": "Single dependency library for EVE Online's ESI",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "trial": "node ./attempt.js"
   },
-  "keywords": ["eve", "eve online", "ESI"],
-  "author": "Erin Rivas",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karnthis/esiio"
+  },
+  "keywords": [
+    "eve",
+    "eve online",
+    "ESI"
+  ],
+  "author": "Erin Rivas <contact@atomicbear.com>",
+  "homepage": "https://github.com/karnthis/make-random#readme",
+	"bugs": "https://github.com/karnthis/make-random/issues",
   "license": "MIT",
+  "readmeFilename": "readme.md",
   "dependencies": {
     "sqlite3": "^4.1.0"
-  },
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.1.4"
   }
 }
