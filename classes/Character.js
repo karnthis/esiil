@@ -6,6 +6,21 @@ module.exports = class Character extends Core {
   constructor(cfg = {}) {
     /* cfg == { base, ver, src, agent, db, clientID, clientSecret } */
     super(cfg)
+    this.contacts = {
+      get: function(character_id, toonID) {
+        return this._makeAuthedGet(`${basePath}/${character_id}/contacts/`, toonID)
+      },
+      //TODO complete POST and PUT to support query strings
+      post: function(character_id, contactArray, toonID) {
+        return this._makeAuthedPost(`${basePath}/${character_id}/contacts/`, JSON.stringify(contactArray), toonID)
+      },
+      put: function(character_id, contactArray, toonID) {
+        return this._makeAuthedPut(`${basePath}/${character_id}/contacts/`, JSON.stringify(contactArray), toonID)
+      },
+      delete: function(character_id, contactArray, toonID) {
+        return this._makeAuthedDelete(`${basePath}/${character_id}/contacts/`, JSON.stringify(contactArray), toonID)
+      }
+    }
   }
 
   // PUBLIC
@@ -43,21 +58,6 @@ module.exports = class Character extends Core {
   }
   clones(character_id, toonID) {
     return this._makeAuthedGet(`${basePath}/${character_id}/clones/`, toonID)
-  }
-  contacts = {
-    get: function(character_id, toonID) {
-      return this._makeAuthedGet(`${basePath}/${character_id}/contacts/`, toonID)
-    },
-    //TODO complete POST and PUT to support query strings
-    post: function(character_id, contactArray, toonID) {
-      return this._makeAuthedPost(`${basePath}/${character_id}/contacts/`, JSON.stringify(contactArray), toonID)
-    },
-    put: function(character_id, contactArray, toonID) {
-      return this._makeAuthedPut(`${basePath}/${character_id}/contacts/`, JSON.stringify(contactArray), toonID)
-    },
-    delete: function(character_id, contactArray, toonID) {
-      return this._makeAuthedDelete(`${basePath}/${character_id}/contacts/`, JSON.stringify(contactArray), toonID)
-    }
   }
   contactLabels(character_id, toonID) {
     return this._makeAuthedGet(`${basePath}/${character_id}/contacts/labels/`, toonID)
