@@ -1,6 +1,6 @@
 {
   "name": "esiio",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Single dependency library for EVE Online's ESI",
   "main": "index.js",
   "scripts": {
