@@ -59,7 +59,7 @@ function allRequest(url, options, payload) {
         res.on('end', () => {
           // console.dir(resBody)
           resolve({
-            body: JSON.parse(resBody.join()),
+            body: JSON.parse(resBody.join('')),
             status
           })
         })
