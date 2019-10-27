@@ -4,14 +4,15 @@ const { URL } = require('./Validate')
 
 module.exports = {
 
-  basicGet(path, data) {
+  basicGet(path, extras = [], data) {
     const options = {
       method: 'GET',
       headers: {
         'User-Agent': data.userAgent
       }
     }
-    const url = `${data.urlPt1}${cleanURL(path)}${data.urlPt2}`
+    const partUrl = `${data.urlPt1}${cleanURL(path)}${data.urlPt2}`
+    const url = [partUrl, ...extras].join('&')
     return allRequest(url, options)
   },
   sendPathRequest(path, options = {}, data, payload = '') {
@@ -27,30 +28,7 @@ module.exports = {
   },
   sendTokenRequest(url, options = {}) {
     return allRequest(url, options)
-  }
-
-
-  // getRequest(url, options) {
-  //   return new Promise((resolve, reject) => {
-  //     if (URL(url)) {
-  //       console.log(url)
-  //       get(url, options, (res) => {
-  //         res.setEncoding('utf8');
-  //         let body = ''
-  //         const status = res.statusCode
-  //         res.on('data', (data) => {
-  //           body += data
-  //         })
-  //         return res.on('end', () => {
-  //           body = JSON.parse(body)
-  //           resolve({ body, status })
-  //         })
-  //       })
-  //     } else reject(new Error('invalid url'))
-  //   })
-  // },
-
-  
+  }  
 }
 
 function cleanURL(s) {

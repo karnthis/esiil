@@ -28,8 +28,8 @@ module.exports = class Core {
   }
 
   // **** FUNCTIONS **** \\
-  _makePublicGet(path) {
-    return basicGet(path, this.dataPack)
+  _makePublicGet(path, extras) {
+    return (extras) ? basicGet(path, extras, this.dataPack) : basicGet(path, this.dataPack)
   }
   _makePublicPost(path, payload) {
     const options = {
