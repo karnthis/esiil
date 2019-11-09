@@ -1,31 +1,31 @@
 const Core = require('../libs/Core')
 
-const basePath = 'ddd'
+const basePath = 'markets'
 
-module.exports = class ddd extends Core {
+module.exports = class Market extends Core {
   constructor(cfg = {}) {
     /* cfg == { base, ver, src, agent, db, clientID, clientSecret } */
     super(cfg)
   }
 
   // PUBLIC
-  marketHistory(region_id) {
-    return this._makePublicGet(`markets/${region_id}/history/`)
+  history(region_id) {
+    return this._makePublicGet(`${basePath}/${region_id}/history/`)
   }
-  marketOrders(region_id) {
-    return this._makePublicGet(`markets/${region_id}/orders/`)
+  orders(region_id, extras) {
+    return this._makePublicGet(`${basePath}/${region_id}/orders/`, extras)
   }
-  marketTypes(region_id) {
-    return this._makePublicGet(`markets/${region_id}/types/`)
+  types(region_id) {
+    return this._makePublicGet(`${basePath}/${region_id}/types/`)
   }
-  marketGroups() {
-    return this._makePublicGet(`markets/groups/`)
+  groups() {
+    return this._makePublicGet(`${basePath}/groups/`)
   }
-  marketGroup(market_group_id) {
-    return this._makePublicGet(`markets/groups/${market_group_id}/`)
+  group(market_group_id) {
+    return this._makePublicGet(`${basePath}/groups/${market_group_id}/`)
   }
-  marketPrices() {
-    return this._makePublicGet(`markets/prices/`)
+  prices() {
+    return this._makePublicGet(`${basePath}/prices/`)
   }
 
   // RESTRICTED
