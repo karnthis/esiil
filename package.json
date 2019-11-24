@@ -1,6 +1,6 @@
 {
   "name": "esiio",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Single dependency library for EVE Online's ESI",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "eve online",
     "ESI"
   ],
-  "author": "Erin Rivas <contact@atomicbear.com>",
+  "author": "Erin Rivas <me@erinrivas.com>",
   "homepage": "https://github.com/karnthis/make-random#readme",
 	"bugs": "https://github.com/karnthis/make-random/issues",
   "license": "MIT",
