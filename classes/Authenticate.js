@@ -28,13 +28,16 @@ module.exports = class Authenticate extends Core {
     }
   }
 
-  buildRequestURL(scopes = []) {
+  buildRequestURL(scopes = [], state = '') {
     const useScope = (this.masterScopes.length > 0) ? this.masterScopes : scopes
+    if (state.includes('&')) console.error(`Request URL state: Must not contain '&' symbol. Sanitizing...`)
     if (useScope.length == 0) throw new Error('must have at least 1 scope selected')
     return [`https://login.eveonline.com/oauth/authorize/?response_type=code`,
-    `redirect_uri=${encodeURI(this.callbackURL)}`,
-    `client_id=${this.clientID}`,
-    `scope=${useScope.join(' ')}`].join('&')
+      `redirect_uri=${encodeURI(this.callbackURL)}`,
+      `client_id=${this.clientID}`,
+      `scope=${useScope.join(' ')}`,
+      `state=${state.replace(/&/g, '')}`
+    ].join('&')
   }
   async setScope(scopes = []) {
     if (scopes == 'all') {

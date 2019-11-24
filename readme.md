@@ -24,8 +24,11 @@ const Auth = new Authenticate(
   }
 )
 
-const Char = new Character(auth.share())
+const Char = new Character(Auth.share())
 // use Char in Express route or directly
+Char.corpHistory(92014574)
+.then(resp => console.log(resp.body))
+.catch(err => console.error(err))
 ```
 
 ## Supported Routes
