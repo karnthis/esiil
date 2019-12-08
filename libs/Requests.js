@@ -1,5 +1,5 @@
 const { get, request } = require('https')
-const { URL } = require('./Validate')
+const { isURL } = require('./Validate')
 
 
 module.exports = {
@@ -11,14 +11,14 @@ module.exports = {
         'User-Agent': data.userAgent
       }
     }
-    const partUrl = `${data.urlPt1}${cleanURL(path)}${data.urlPt2}`
+    const partUrl = `${data.domainAndVersion}${cleanURL(path)}${data.queryParams}`
     const url = [partUrl, ...extras].join('&')
     return allRequest(url, options)
   },
   sendPathRequest(path, options = {}, data, payload = '') {
     options.headers = options.headers || {}
     options.headers['User-Agent'] = data.userAgent
-    const url = `${data.urlPt1}${cleanURL(path)}${data.urlPt2}`
+    const url = `${data.domainAndVersion}${cleanURL(path)}${data.queryParams}`
     return allRequest(url, options, payload)
   },
   sendCustomRequest(url, options = {}, payload = '', data) {
@@ -43,7 +43,7 @@ function allRequest(url, options, payload) {
   // console.dir(options)
   // console.dir(payload)
   return new Promise((resolve, reject) => {
-    if (URL(url)) {
+    if (isURL(url)) {
       console.log(url)
       const req = request(url, options, (res) => {
         // console.dir('req.getHeaders')

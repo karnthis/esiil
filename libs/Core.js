@@ -10,14 +10,14 @@ module.exports = class Core {
     this.version = cfg.ver || 'latest/' // latest || dev || legacy
     this.source = cfg.src || 'tranquility' // tranquility || singularity
 
-    this.urlPt1 = `${this.baseURL}${this.version}`
-    this.urlPt2 = `?datasource=${this.source}`
+    this.domainAndVersion = `${this.baseURL}${this.version}`
+    this.queryParams = `?datasource=${this.source}`
     this.db = new SQLEngine(cfg.db)
 
     this.dataPack = {
       userAgent: this.userAgent,
-      urlPt1: this.urlPt1,
-      urlPt2: this.urlPt2
+      domainAndVersion: this.domainAndVersion,
+      queryParams: this.queryParams
     }
     this.tokenOptions = {
       headers: {

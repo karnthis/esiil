@@ -5,16 +5,16 @@ function IsString(s) {
 function isInt(s) {
   return !isNaN(Number(s))
 }
-function URL(s) {
+function isURL(s) {
   return (IsString(s) && /^https?:\/\//.test(s));
 }
-function Version(s) {
+function isVersion(s) {
   return (IsString(s) && /^(?:latest|dev|legacy)$/.test(s));
 }
-function Source(s) {
+function isSource(s) {
   return (IsString(s) && /^(?:tranquility|singularity)$/.test(s));
 }
-function CacheMode(s) {
+function isCacheMode(s) {
   return (IsString(s) && /^(?:sqlDisk|sqlMemory)$/.test(s));
 }
 
@@ -22,9 +22,9 @@ function CacheMode(s) {
 
 module.exports = {
   IsString,
-  URL,
-  Version,
-  Source,
-  CacheMode,
+  isURL,
+  isVersion,
+  isSource,
+  isCacheMode,
   isInt
 } 
