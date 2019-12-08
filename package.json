@@ -17,8 +17,8 @@
     "ESI"
   ],
   "author": "Erin Rivas <me@erinrivas.com>",
-  "homepage": "https://github.com/karnthis/make-random#readme",
-	"bugs": "https://github.com/karnthis/make-random/issues",
+  "homepage": "https://github.com/karnthis/esiio#readme",
+	"bugs": "https://github.com/karnthis/esiio/issues",
   "license": "MIT",
   "readmeFilename": "readme.md",
   "dependencies": {
