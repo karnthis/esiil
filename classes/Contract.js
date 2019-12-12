@@ -9,14 +9,14 @@ module.exports = class ddd extends Core {
   }
 
   // PUBLIC
-  allInRegion(region_id) {
-    return this._makePublicGet(`contracts/public/${region_id}/`)
+  allInRegion(regionID) {
+    return this._makePublicGet(`contracts/public/${regionID}/`)
   }
-  oneBids(contract_id) {
-    return this._makePublicGet(`contracts/public/bids/${contract_id}/`)
+  oneBids(contractID) {
+    return this._makePublicGet(`contracts/public/bids/${contractID}/`)
   }
-  oneItems(contract_id) {
-    return this._makePublicGet(`contracts/public/items/${contract_id}/`)
+  oneItems(contractID) {
+    return this._makePublicGet(`contracts/public/items/${contractID}/`)
   }
 
   // RESTRICTED

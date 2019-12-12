@@ -1,18 +1,27 @@
-const { basicGet, sendPathRequest, sendCustomRequest } = require('./Requests')
-const { nowInSeconds, tokenExchange } = require('../libs/Misc')
-const SQLEngine = require('./Database')
+'use strict'
+
+const Defaults = require('../../defaults')
+
+const { basicGet, sendPathRequest } = require('../../libs/Requests')
+
+const { nowInSeconds } = require('../../helpers/Time')
+const { tokenExchange } = require('./CoreHelpers')
 
 
-module.exports = class Core {
-  constructor(cfg = {}) {
-    this.userAgent = cfg.agent || 'ESIIO-Default/0.x'
-    this.baseURL = cfg.base || 'https://esi.evetech.net/' // should not be overrode
-    this.version = cfg.ver || 'latest/' // latest || dev || legacy
-    this.source = cfg.src || 'tranquility' // tranquility || singularity
+class CoreClass {
+  constructor(cfg) {
+    this.updateConfig(cfg)
+  }
+
+  updateConfig(cfg = {}) {
+    this.userAgent = cfg.userAgent || Defaults.userAgent
+    this.baseURL = cfg.baseURL || Defaults.baseURL
+    this.version = cfg.version || Defaults.version
+    this.source = cfg.source || Defaults.source
+    this.db = cfg.db
 
     this.domainAndVersion = `${this.baseURL}${this.version}`
     this.queryParams = `?datasource=${this.source}`
-    this.db = new SQLEngine(cfg.db)
 
     this.dataPack = {
       userAgent: this.userAgent,
@@ -25,13 +34,19 @@ module.exports = class Core {
       },
       auth: `${cfg.clientID}:${cfg.clientSecret}`
     }
+    if (!cfg.clientID || !cfg.clientSecret) {
+      console.log('Missing clientID or clientSecret, authenticated methods disabled')
+      //TODO add disabling of authed routes
+    }
   }
+}
 
   // **** FUNCTIONS **** \\
-  _makePublicGet(path, extras) {
-    return (extras) ? basicGet(path, extras, this.dataPack) : basicGet(path, this.dataPack)
+  function _makePublicGet(path, extraParams) {
+    return basicGet(path, this.dataPack, extraParams)
   }
-  _makePublicPost(path, payload) {
+
+  function _makePublicPost(path, payload) {
     const options = {
       method: 'POST',
       headers: {
@@ -41,19 +56,16 @@ module.exports = class Core {
     return sendPathRequest(path, options, this.dataPack, payload)
   }
 
-  async _findToken(toonID) {
+  async function _findToken(toonID) {
     let { access_token, expires, refresh_token } = await this.db.toon2token2(toonID)
-    // console.log('token: ',access_token)
     if (nowInSeconds() >= expires) {
     console.log('refresh hit')
-    // console.dir(refresh_token)
     access_token = await this._refreshToken(refresh_token)
     }
-    // console.log(access_token)
     return access_token
   }
 
-  async _makeAuthedGet(path, toonID) {
+  async function _makeAuthedGet(path, toonID) {
     const access_token = await this._findToken(toonID)
     const options = {
       method: 'GET',
@@ -64,7 +76,7 @@ module.exports = class Core {
     }
     return sendPathRequest(path, options, this.dataPack)
   }
-  async _makeAuthedPost(path, payload, toonID) {
+  async function _makeAuthedPost(path, payload, toonID) {
     const access_token = await this._findToken(toonID)
     const options = {
       method: 'POST',
@@ -76,7 +88,7 @@ module.exports = class Core {
     }
     return sendPathRequest(path, options, this.dataPack, payload)
   }
-  async _makeAuthedPut(path, payload, toonID) {
+  async function _makeAuthedPut(path, payload, toonID) {
     const access_token = await this._findToken(toonID)
     const options = {
       method: 'PUT',
@@ -88,7 +100,7 @@ module.exports = class Core {
     }
     return sendPathRequest(path, options, this.dataPack, payload)
   }
-  async _makeAuthedDelete(path, payload, toonID) {
+  async function _makeAuthedDelete(path, payload, toonID) {
     const access_token = await this._findToken(toonID)
     const options = {
       method: 'DELETE',
@@ -100,23 +112,34 @@ module.exports = class Core {
     }
     return sendPathRequest(path, options, this.dataPack, payload)
   }
-  async _refreshToken(_refreshToken = '') {
+  async function _refreshToken(_refreshToken = '') {
     const expiration = nowInSeconds()
     const payload = JSON.stringify({
         "grant_type":"refresh_token",
         "refresh_token":_refreshToken
       })
-    const { access_token, refresh_token } = await tokenExchange(this.tokenOptions, payload, {userAgent: this.userAgent})
+    const { access_token, refresh_token } = await tokenExchange({userAgent: this.userAgent}, this.tokenOptions, payload)
       .then(res => res.body)
       .catch(err => {
         console.error(err)
         throw new Error(err)
       })
-      // console.log('in refresh')
-      // console.log(access_token)
     const _ = await this.db.saveRefreshedToken(access_token, expiration, refresh_token)
     return access_token
   }
   // **** END FUNCTIONS **** \\
-}
+
 // **** END CLASS **** \\
+
+
+module.exports = {
+  CoreClass,
+  // _makePublicGet,
+  // _makePublicPost,
+  // _findToken,
+  // _makeAuthedGet,
+  // _makeAuthedPost,
+  // _makeAuthedPut,
+  // _makeAuthedDelete,
+  // _refreshToken
+}

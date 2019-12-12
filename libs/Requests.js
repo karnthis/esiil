@@ -1,10 +1,10 @@
-const { get, request } = require('https')
-const { isURL } = require('./Validate')
+const { request } = require('https')
+const { isURL } = require('../helpers/Validation')
 
 
 module.exports = {
 
-  basicGet(path, extras = [], data) {
+  basicGet(path, data, extraParams = []) {
     const options = {
       method: 'GET',
       headers: {
@@ -12,7 +12,7 @@ module.exports = {
       }
     }
     const partUrl = `${data.domainAndVersion}${cleanURL(path)}${data.queryParams}`
-    const url = [partUrl, ...extras].join('&')
+    const url = [partUrl, ...extraParams].join('&')
     return allRequest(url, options)
   },
   sendPathRequest(path, options = {}, data, payload = '') {
@@ -39,16 +39,10 @@ function cleanURL(s) {
 }
 
 function allRequest(url, options, payload) {
-  // console.dir(url)
-  // console.dir(options)
-  // console.dir(payload)
   return new Promise((resolve, reject) => {
     if (isURL(url)) {
       console.log(url)
       const req = request(url, options, (res) => {
-        // console.dir('req.getHeaders')
-        // console.dir(req.getHeaders())
-        // console.dir('end req.getHeaders')
         res.setEncoding('utf8');
         const resBody = []
         const status = res.statusCode
@@ -57,14 +51,12 @@ function allRequest(url, options, payload) {
           resBody.push(data)
         })
         res.on('end', () => {
-          // console.dir(resBody)
           resolve({
             body: JSON.parse(resBody.join('')),
             status
           })
         })
       })
-      // if (payload) req.write(JSON.stringify(payload))
       if (payload) req.write(payload)
       req.on('error', function (err) {
         reject(err)

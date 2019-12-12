@@ -9,109 +9,109 @@ module.exports = class Corp extends Core {
   }
 
   // PUBLIC
-  one(corporation_id) {
-    return this._makePublicGet(`${basePath}/${corporation_id}/`)
+  one(corporationID) {
+    return this._makePublicGet(`${basePath}/${corporationID}/`)
   }
-  allianceHistory(corporation_id) {
-    return this._makePublicGet(`${basePath}/${corporation_id}/alliancehistory/`)
+  allianceHistory(corporationID) {
+    return this._makePublicGet(`${basePath}/${corporationID}/alliancehistory/`)
   }
-  images(corporation_id) {
-    return this._makePublicGet(`${basePath}/${corporation_id}/icons/`)
+  images(corporationID) {
+    return this._makePublicGet(`${basePath}/${corporationID}/icons/`)
   }
   npc() {
     return this._makePublicGet(`${basePath}/npccorps/`)
   }
 
   // RESTRICTED
-  assets(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/assets/`, toonID)
+  assets(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/assets/`, toonID)
   }
-  assetLocations(corporation_id, itemArray, toonID) {
-    return this._makeAuthedPost(`${basePath}/${corporation_id}/assets/locations/`, JSON.stringify(itemArray), toonID)
+  assetLocations(corporationID, itemArray, toonID) {
+    return this._makeAuthedPost(`${basePath}/${corporationID}/assets/locations/`, JSON.stringify(itemArray), toonID)
   }
-  assetNames(corporation_id, itemArray, toonID) {
-    return this._makeAuthedPost(`${basePath}/${corporation_id}/assets/names/`, JSON.stringify(itemArray), toonID)
+  assetNames(corporationID, itemArray, toonID) {
+    return this._makeAuthedPost(`${basePath}/${corporationID}/assets/names/`, JSON.stringify(itemArray), toonID)
   }
-  blueprints(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/blueprints/`, toonID)
+  blueprints(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/blueprints/`, toonID)
   }
-  bookmarks(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/bookmarks/`, toonID)
+  bookmarks(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/bookmarks/`, toonID)
   }
-  bookmarkFolders(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/bookmarks/folders/`, toonID)
+  bookmarkFolders(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/bookmarks/folders/`, toonID)
   }
-  contacts(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/contacts/`, toonID)
+  contacts(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/contacts/`, toonID)
   }
-  contactLabels(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/contacts/labels/`, toonID)
+  contactLabels(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/contacts/labels/`, toonID)
   }
-  containers(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/containers/logs/`, toonID)
+  containers(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/containers/logs/`, toonID)
   }
-  contracts(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/contracts/`, toonID)
+  contracts(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/contracts/`, toonID)
   }
-  contractBids(corporation_id, contract_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/contracts/${contract_id}/bids/`, toonID)
+  contractBids(corporationID, contractID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/contracts/${contractID}/bids/`, toonID)
   }
-  contractItems(corporation_id, contract_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/contracts/${contract_id}/items/`, toonID)
+  contractItems(corporationID, contractID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/contracts/${contractID}/items/`, toonID)
   }
-  divisions(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/divisions/`, toonID)
+  divisions(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/divisions/`, toonID)
   }
-  facilities(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/facilities/`, toonID)
+  facilities(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/facilities/`, toonID)
   }
-  factionWarfare(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/fw/stats/`, toonID)
+  factionWarfare(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/fw/stats/`, toonID)
   }
-  medals(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/medals/`, toonID)
+  medals(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/medals/`, toonID)
   }
-  medalsIssued(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/medals/issued/`, toonID)
+  medalsIssued(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/medals/issued/`, toonID)
   }
-  members(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/members/`, toonID)
+  members(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/members/`, toonID)
   }
-  memberLimit(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/members/limit/`, toonID)
+  memberLimit(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/members/limit/`, toonID)
   }
-  memberTitles(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/members/titles/`, toonID)
+  memberTitles(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/members/titles/`, toonID)
   }
-  memberTracking(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/memberTracking/`, toonID)
+  memberTracking(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/memberTracking/`, toonID)
   }
-  roles(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/roles/`, toonID)
+  roles(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/roles/`, toonID)
   }
-  rolesHistory(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/roles/history/`, toonID)
+  rolesHistory(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/roles/history/`, toonID)
   }
-  roles(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/roles/`, toonID)
+  roles(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/roles/`, toonID)
   }
-  shareholders(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/shareholders/`, toonID)
+  shareholders(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/shareholders/`, toonID)
   }
-  standings(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/standings/`, toonID)
+  standings(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/standings/`, toonID)
   }
-  starbases(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/starbases/`, toonID)
+  starbases(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/starbases/`, toonID)
   }
-  starbases(corporation_id, starbase_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/starbases/${starbase_id}`, toonID)
+  starbases(corporationID, starbaseID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/starbases/${starbaseID}`, toonID)
   }
-  structures(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/structures/`, toonID)
+  structures(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/structures/`, toonID)
   }
-  titles(corporation_id, toonID) {
-    return this._makeAuthedGet(`${basePath}/${corporation_id}/titles/`, toonID)
+  titles(corporationID, toonID) {
+    return this._makeAuthedGet(`${basePath}/${corporationID}/titles/`, toonID)
   }
   
 

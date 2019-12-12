@@ -9,20 +9,20 @@ module.exports = class Market extends Core {
   }
 
   // PUBLIC
-  history(region_id) {
-    return this._makePublicGet(`${basePath}/${region_id}/history/`)
+  history(regionID) {
+    return this._makePublicGet(`${basePath}/${regionID}/history/`)
   }
-  orders(region_id, extras) {
-    return this._makePublicGet(`${basePath}/${region_id}/orders/`, extras)
+  orders(regionID, extras) {
+    return this._makePublicGet(`${basePath}/${regionID}/orders/`, extras)
   }
-  types(region_id) {
-    return this._makePublicGet(`${basePath}/${region_id}/types/`)
+  types(regionID) {
+    return this._makePublicGet(`${basePath}/${regionID}/types/`)
   }
   groups() {
     return this._makePublicGet(`${basePath}/groups/`)
   }
-  group(market_group_id) {
-    return this._makePublicGet(`${basePath}/groups/${market_group_id}/`)
+  group(market_groupID) {
+    return this._makePublicGet(`${basePath}/groups/${market_groupID}/`)
   }
   prices() {
     return this._makePublicGet(`${basePath}/prices/`)

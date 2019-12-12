@@ -34,7 +34,7 @@ module.exports = class Authenticate extends Core {
     if (useScope.length == 0) throw new Error('must have at least 1 scope selected')
     return [`https://login.eveonline.com/oauth/authorize/?response_type=code`,
       `redirect_uri=${encodeURI(this.callbackURL)}`,
-      `client_id=${this.clientID}`,
+      `clientID=${this.clientID}`,
       `scope=${useScope.join(' ')}`,
       `state=${state.replace(/&/g, '')}`
     ].join('&')

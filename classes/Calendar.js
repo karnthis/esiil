@@ -13,17 +13,17 @@ module.exports = class Calendar extends Core {
 
 
   // RESTRICTED
-  all(character_id, toonID) {
-    return this._makeAuthedGet(`${rootPath}/${character_id}/${basePath}/`, toonID)
+  all(characterID, toonID) {
+    return this._makeAuthedGet(`${rootPath}/${characterID}/${basePath}/`, toonID)
   }
-  one(character_id, event_id, toonID) {
-    return this._makeAuthedGet(`${rootPath}/${character_id}/${basePath}/${event_id}/`, toonID)
+  one(characterID, eventID, toonID) {
+    return this._makeAuthedGet(`${rootPath}/${characterID}/${basePath}/${eventID}/`, toonID)
   }
-  attendees(character_id, event_id, toonID) {
-    return this._makeAuthedGet(`${rootPath}/${character_id}/${basePath}/${event_id}/attendees/`, toonID)
+  attendees(characterID, eventID, toonID) {
+    return this._makeAuthedGet(`${rootPath}/${characterID}/${basePath}/${eventID}/attendees/`, toonID)
   }
-  respond(character_id, event_id, response, toonID) {
+  respond(characterID, eventID, response, toonID) {
     if (!response.match(/accepted|declined|tentative/)) throw new Error('response must be accepted, declined, or tentative')
-    return this._makeAuthedPut(`${rootPath}/${character_id}/${basePath}/${event_id}/`, JSON.stringify({response}), toonID)
+    return this._makeAuthedPut(`${rootPath}/${characterID}/${basePath}/${eventID}/`, JSON.stringify({response}), toonID)
   }
 }

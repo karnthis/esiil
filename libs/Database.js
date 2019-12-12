@@ -6,13 +6,11 @@ module.exports = class SQLEngine {
   constructor(cfg = {}) {
     const { dbPath = './esiio_db/', dbName = 'main.sqlite' } = cfg
     if (!FS.existsSync(`${dbPath}${dbName}`)) {
-      // console.log('not exists')
       FS.mkdirSync(`${dbPath}`, { recursive: true });
       FS.writeFileSync(`${dbPath}${dbName}`, '', { flag: 'wx' }, function (err) {
         if (err) console.error(err);
       })
     } else {
-      // console.log('exists')
     }
     const { Database } = SQLite.verbose()
     if (false && cfg.mode == 'memory') {
