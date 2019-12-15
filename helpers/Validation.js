@@ -1,30 +1,30 @@
 
-function IsString(testValue) {
+function _isString(testValue) {
   return typeof testValue === 'string';
 }
-function isInt(testValue) {
+function _isInt(testValue) {
   return !isNaN(Number(testValue))
 }
-function isURL(testValue) {
-  return (IsString(testValue) && /^https?:\/\//.test(s));
+function _isURL(testValue) {
+  return (_isString(testValue) && /^https?:\/\//.test(s));
 }
-function isVersion(testValue) {
-  return (IsString(testValue) && /^(?:latest|dev|legacy)$/.test(s));
+function _isVersion(testValue) {
+  return (_isString(testValue) && /^(?:latest|dev|legacy)$/.test(s));
 }
-function isSource(testValue) {
-  return (IsString(testValue) && /^(?:tranquility|singularity)$/.test(s));
+function _isSource(testValue) {
+  return (_isString(testValue) && /^(?:tranquility|singularity)$/.test(s));
 }
-function isCacheMode(testValue) {
-  return (IsString(testValue) && /^(?:sqlDisk|sqlMemory)$/.test(s));
+function _isCacheMode(testValue) {
+  return (_isString(testValue) && /^(?:sqlDisk|sqlMemory)$/.test(s));
 }
 
 
 
 module.exports = {
-  IsString,
-  isURL,
-  isVersion,
-  isSource,
-  isCacheMode,
-  isInt
+  _isString,
+  _isURL,
+  _isVersion,
+  _isSource,
+  _isCacheMode,
+  _isInt
 } 

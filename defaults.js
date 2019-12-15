@@ -5,4 +5,5 @@ module.exports = {
   baseURL: 'https://esi.evetech.net/',
   version: 'latest',
   source: 'tranquility',
+  oauthURL: 'https://login.eveonline.com/oauth',
 }

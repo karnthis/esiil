@@ -1,9 +1,9 @@
 'use strict'
 
-function nowInSeconds() {
+function _nowInSeconds() {
   return Math.round(Date.now() / 1000)
 }
 
 module.exports = {
-  nowInSeconds
+  _nowInSeconds
 }

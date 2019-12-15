@@ -37,13 +37,21 @@ class ESIIL extends Core.CoreClass {
     })
   }
 
+  readThis() {
+    console.dir(this)
+  }
+
   newAlliance() {
     // console.log('alliance')
-    return new Alliance()
+    const instance = new Alliance(this)
+    this.instances.push(instance)
+    return instance
   }
   newCharacter() {
-    // console.log(this.data)
-    // return new Character()
+    // console.log(this)
+    const instance = new Character(this)
+    this.instances.push(instance)
+    return instance
   }
 }
 

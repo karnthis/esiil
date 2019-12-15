@@ -1,44 +1,40 @@
+'use strict'
+
 const { request } = require('https')
 const { isURL } = require('../helpers/Validation')
-
+const { _cleanURL } = require('./RequestsHelpers')
 
 module.exports = {
 
-  basicGet(path, data, extraParams = []) {
+  _basicGet(path, data, extraParams = []) {
     const options = {
       method: 'GET',
       headers: {
         'User-Agent': data.userAgent
       }
     }
-    const partUrl = `${data.domainAndVersion}${cleanURL(path)}${data.queryParams}`
+    const partUrl = `${data.domainAndVersion}${_cleanURL(path)}${data.queryParams}`
     const url = [partUrl, ...extraParams].join('&')
-    return allRequest(url, options)
+    return _allRequest(url, options)
   },
-  sendPathRequest(path, options = {}, data, payload = '') {
+  //TODO clean up arg order
+  _sendPathRequest(path, options = {}, data, payload = '') {
     options.headers = options.headers || {}
     options.headers['User-Agent'] = data.userAgent
-    const url = `${data.domainAndVersion}${cleanURL(path)}${data.queryParams}`
-    return allRequest(url, options, payload)
+    const url = `${data.domainAndVersion}${_cleanURL(path)}${data.queryParams}`
+    return _allRequest(url, options, payload)
   },
-  sendCustomRequest(url, options = {}, payload = '', data) {
+  _sendCustomRequest(url, options = {}, payload = '', data) {
     options.headers = options.headers || {}
     options.headers['User-Agent'] = data.userAgent
-    return allRequest(url, options, payload)
+    return _allRequest(url, options, payload)
   },
-  sendTokenRequest(url, options = {}) {
-    return allRequest(url, options)
+  _sendTokenRequest(url, options = {}) {
+    return _allRequest(url, options)
   }  
 }
 
-function cleanURL(s) {
-  while (s.indexOf('/') === 0) {
-    s = s.slice(1)
-  }
-  return s
-}
-
-function allRequest(url, options, payload) {
+function _allRequest(url, options, payload) {
   return new Promise((resolve, reject) => {
     if (isURL(url)) {
       console.log(url)
