@@ -1,7 +1,7 @@
 'use strict'
 
 const { request } = require('https')
-const { isURL } = require('../helpers/Validation')
+const { _isURL } = require('../helpers/Validation')
 const { _cleanURL } = require('./RequestsHelpers')
 
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
 
 function _allRequest(url, options, payload) {
   return new Promise((resolve, reject) => {
-    if (isURL(url)) {
+    if (_isURL(url)) {
       console.log(url)
       const req = request(url, options, (res) => {
         res.setEncoding('utf8');
@@ -53,7 +53,7 @@ function _allRequest(url, options, payload) {
           })
         })
       })
-      if (payload) req.write(payload)
+      if (payload) req.write(JSON.stringify(payload))
       req.on('error', function (err) {
         reject(err)
       })

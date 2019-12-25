@@ -1,9 +1,7 @@
 'use strict'
 
 const Defaults = require('../../defaults')
-
 const { _basicGet, _sendPathRequest } = require('../../libs/Requests')
-
 const { _findToken } = require('../../helpers/Token')
 
 
@@ -68,23 +66,20 @@ class CoreClass {
 }
 
 // **** FUNCTIONS **** \\
-function _makePublicGet(path, extraParams) {
-  return _basicGet(path, this.dataPack, extraParams)
+function _makePublicGet(dataPack, path, extraParams) {
+  return _basicGet(path, dataPack, extraParams)
+  // return _basicGet(path, this.dataPack, extraParams)
 }
-
-function _makePublicPost(path, payload) {
+function _makePublicPost(dataPack, path, payload) {
   const options = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
   }
-  return _sendPathRequest(path, options, this.dataPack, payload)
+  return _sendPathRequest(path, options, dataPack, payload)
 }
-
-
-
-async function _makeAuthedGet(path, toonID) {
+async function _makeAuthedGet(dataPack, path, toonID) {
   const access_token = await _findToken(toonID)
   const options = {
     method: 'GET',
@@ -93,32 +88,34 @@ async function _makeAuthedGet(path, toonID) {
       'Authorization': `Bearer ${access_token}`
     },
   }
-  return _sendPathRequest(path, options, this.dataPack)
+  return _sendPathRequest(path, options, dataPack)
 }
-async function _makeAuthedPost(path, payload, toonID) {
+async function _makeAuthedPost(dataPack, path, payload, toonID) {
   const access_token = await _findToken(toonID)
   const options = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(payload),
+      'Content-Length': Buffer.byteLength(JSON.stringify(payload)),
       'Authorization': `Bearer ${access_token}`
     },
   }
-  return _sendPathRequest(path, options, this.dataPack, payload)
+  return _sendPathRequest(path, options, dataPack, payload)
 }
+//TODO finish real logic
 async function _makeAuthedPut(path, payload, toonID) {
   const access_token = await _findToken(toonID)
   const options = {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(payload),
+      'Content-Length': Buffer.byteLength(JSON.stringify(payload)),
       'Authorization': `Bearer ${access_token}`
     },
   }
   return _sendPathRequest(path, options, this.dataPack, payload)
 }
+//TODO finish real logic
 async function _makeAuthedDelete(path, payload, toonID) {
   const access_token = await _findToken(toonID)
   const options = {
@@ -139,10 +136,10 @@ async function _makeAuthedDelete(path, payload, toonID) {
 
 module.exports = {
   CoreClass,
-  // _makePublicGet,
-  // _makePublicPost,
-  // _makeAuthedGet,
-  // _makeAuthedPost,
+  _makePublicGet,
+  _makePublicPost,
+  _makeAuthedGet,
+  _makeAuthedPost,
   // _makeAuthedPut,
   // _makeAuthedDelete,
 }

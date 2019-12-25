@@ -1,14 +1,19 @@
 'use strict'
 
-function all() {
-  return this._makePublicGet(`${basePath}/`)
+const { _makePublicGet } = require('../Core')
+const { basePath } = require('./allianceHelper')
+
+function _all(dataPack) {
+  return _makePublicGet(dataPack, `${basePath}/`)
 }
-function one(allianceID) {
-  return this._makePublicGet(`${basePath}/${allianceID}`)
+function _one(dataPack, allianceID) {
+  return _makePublicGet(dataPack, `${basePath}/${allianceID}`)
 }
-function memberCorps(allianceID) {
-  return this._makePublicGet(`${basePath}/${allianceID}/corporations/`)
+function _memberCorps(dataPack, allianceID) {
+  return _makePublicGet(dataPack, `${basePath}/${allianceID}/corporations/`)
 }
-function images(allianceID) {
-  return this._makePublicGet(`${basePath}/${allianceID}/icons/`)
+function _images(dataPack, allianceID) {
+  return _makePublicGet(dataPack, `${basePath}/${allianceID}/icons/`)
 }
+
+module.exports = { _all, _one, _memberCorps, _images }

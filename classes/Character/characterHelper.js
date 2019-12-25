@@ -1,5 +1,5 @@
 'use strict'
 
-const basePath = 'alliance'
+const basePath = 'characters'
 
 module.exports = { basePath }

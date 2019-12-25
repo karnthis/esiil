@@ -1,7 +1,7 @@
 const Core = require('../libs/Core')
 
-const rootPath = 'characters'
-const basePath = 'calendar'
+const basePath = 'characters'
+const subPath = 'calendar'
 
 module.exports = class Calendar extends Core {
   constructor(cfg = {}) {
@@ -14,13 +14,13 @@ module.exports = class Calendar extends Core {
 
   // RESTRICTED
   all(characterID, toonID) {
-    return this._makeAuthedGet(`${rootPath}/${characterID}/${basePath}/`, toonID)
+    return this._makeAuthedGet(`${basePath}/${characterID}/${subPath}/`, toonID)
   }
   one(characterID, eventID, toonID) {
-    return this._makeAuthedGet(`${rootPath}/${characterID}/${basePath}/${eventID}/`, toonID)
+    return this._makeAuthedGet(`${basePath}/${characterID}/${subPath}/${eventID}/`, toonID)
   }
   attendees(characterID, eventID, toonID) {
-    return this._makeAuthedGet(`${rootPath}/${characterID}/${basePath}/${eventID}/attendees/`, toonID)
+    return this._makeAuthedGet(`${basePath}/${characterID}/${subPath}/${eventID}/attendees/`, toonID)
   }
   respond(characterID, eventID, response, toonID) {
     if (!response.match(/accepted|declined|tentative/)) throw new Error('response must be accepted, declined, or tentative')
