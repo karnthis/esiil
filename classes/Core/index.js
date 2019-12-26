@@ -11,6 +11,7 @@ class CoreClass {
   }
 
   updateConfig(cfg = {}) {
+    // console.dir(cfg)
     this.userAgent = cfg.userAgent || Defaults.userAgent
     this.baseURL = cfg.baseURL || Defaults.baseURL
     this.version = cfg.version || Defaults.version
@@ -19,10 +20,14 @@ class CoreClass {
     this.scopes = cfg.scopes || []
     this.state = cfg.state || ''
 
+    this.clientID = cfg.clientID
+    this.clientSecret = cfg.clientSecret
+
+
     this.domainAndVersion = `${this.baseURL}${this.version}`
     this.queryParams = `?datasource=${this.source}`
 
-    this.bundle = {
+    this.dataPack = {
       tokenOptions: {
         headers: {
           'Content-Type': 'application/json'
@@ -34,19 +39,24 @@ class CoreClass {
       version: this.version,
       source: this.source,
       db: this.db,
-      scopes: this.scopes,
-      state: this.state,
-      authedEnabled: this.authedEnabled,
-      clientID: this.clientID,
+      queryParams: this.queryParams,
+      domainAndVersion: this.domainAndVersion,
+      // scopes: this.scopes,
+      // state: this.state,
+      // authedEnabled: this.authedEnabled,
+      // clientID: this.clientID,
       // clientSecret: this.clientSecret
     }
-    this.dataPack = {
-      userAgent: this.userAgent,
-      domainAndVersion: this.domainAndVersion,
-      queryParams: this.queryParams
-    }
+    // this.dataPack = {
+    //   userAgent: this.userAgent,
+    //   domainAndVersion: this.domainAndVersion,
+    //   queryParams: this.queryParams,
+    //   db: this.db
+    // }
     
     if (!cfg.clientID || !cfg.clientSecret) {
+      console.log(cfg.clientID)
+      console.log(cfg.clientSecret)
       console.log('Missing clientID or clientSecret, authenticated methods disabled')
       //TODO add disabling of authed routes
       this.authedEnabled = false
@@ -80,7 +90,7 @@ function _makePublicPost(dataPack, path, payload) {
   return _sendPathRequest(path, options, dataPack, payload)
 }
 async function _makeAuthedGet(dataPack, path, toonID) {
-  const access_token = await _findToken(toonID)
+  const access_token = await _findToken(dataPack, toonID)
   const options = {
     method: 'GET',
     headers: {
@@ -91,7 +101,7 @@ async function _makeAuthedGet(dataPack, path, toonID) {
   return _sendPathRequest(path, options, dataPack)
 }
 async function _makeAuthedPost(dataPack, path, payload, toonID) {
-  const access_token = await _findToken(toonID)
+  const access_token = await _findToken(dataPack, toonID)
   const options = {
     method: 'POST',
     headers: {
@@ -104,7 +114,7 @@ async function _makeAuthedPost(dataPack, path, payload, toonID) {
 }
 //TODO finish real logic
 async function _makeAuthedPut(path, payload, toonID) {
-  const access_token = await _findToken(toonID)
+  const access_token = await _findToken(dataPack, toonID)
   const options = {
     method: 'PUT',
     headers: {
@@ -117,7 +127,7 @@ async function _makeAuthedPut(path, payload, toonID) {
 }
 //TODO finish real logic
 async function _makeAuthedDelete(path, payload, toonID) {
-  const access_token = await _findToken(toonID)
+  const access_token = await _findToken(dataPack, toonID)
   const options = {
     method: 'DELETE',
     headers: {

@@ -59,7 +59,7 @@ module.exports = class SQLEngine {
     return new Promise((resolve, reject) => {
       this.db.get('SELECT access_token as accessToken, expires, refresh_token as refreshToken FROM users WHERE char_id = ?', [ toonID ], (err, row) => {
         if (err) reject(new Error(err))
-        return resolve(row)
+        return (row) ? resolve(row) : resolve({})
       })
     })
   }

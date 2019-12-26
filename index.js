@@ -1,13 +1,14 @@
+'use strict'
+
 const Core = require('./classes/Core')
 const SQLEngine = require('./libs/Database')
-
 
 // const { Icons } = require('./classes/Groups')
 const Alliance = require('./classes/Alliance')
 // const Authenticate = require('./classes/Authenticate')
 const Character = require('./classes/Character')
 // const Contract = require('./classes/Contract')
-// const Corp = require('./classes/Corp')
+const Corp = require('./classes/Corp')
 // const Dogma = require('./classes/Dogma')
 // const FactionWarfare = require('./classes/FactionWarfare')
 // const Fleet = require('./classes/Fleet')
@@ -42,14 +43,17 @@ class ESIIL extends Core.CoreClass {
   }
 
   newAlliance() {
-    // console.log('alliance')
     const instance = new Alliance(this)
     this.instances.push(instance)
     return instance
   }
   newCharacter() {
-    // console.log(this)
     const instance = new Character(this)
+    this.instances.push(instance)
+    return instance
+  }
+  newCorp() {
+    const instance = new Corp(this)
     this.instances.push(instance)
     return instance
   }
