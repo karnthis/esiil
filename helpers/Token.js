@@ -11,7 +11,9 @@ function _tokenExchange(data, options, payload) {
 
 async function _findToken(bundle, toonID) {
   let { accessToken, expires, refreshToken } = await bundle.db.toon2token2(toonID)
-  if (_nowInSeconds() >= expires) {
+  if (!accessToken) {
+    
+  } else if (_nowInSeconds() >= expires) {
     accessToken = await _refreshToken(bundle, refreshToken)
   }
   return accessToken

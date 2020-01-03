@@ -5,7 +5,6 @@ const { _nowInSeconds } = require('./helpers/Time')
 const { _sendTokenRequest } = require('./libs/Requests')
 const { _tokenExchange } = require('./helpers/Token')
 
-
 function _tokenVerify(accessToken, userAgent) {
   const options = {
     headers: {
@@ -15,17 +14,6 @@ function _tokenVerify(accessToken, userAgent) {
     },
   }
   return _sendTokenRequest(`${oauthURL}/verify`, options)
-}
-
-
-function _buildRequestURL(bundle) {
-  if (bundle.state.includes('&')) console.error(`Request URL state: Must not contain '&' symbol. Sanitizing...`)
-  return [`${oauthURL}/authorize/?response_type=code`,
-    `redirect_uri=${encodeURI(bundle.callbackURL)}`,
-    `clientID=${bundle.clientID}`,
-    `scope=${bundle.scopes.join(' ')}`,
-    `state=${bundle.state.replace(/&/g, '')}`
-  ].join('&')
 }
 
 async function _processAuthToken(bundle, authToken = '') {
@@ -54,7 +42,7 @@ async function _processAuthToken(bundle, authToken = '') {
   return {toonID: CharacterID}
 }
 
+
 module.exports = {
-  _buildRequestURL,
   _processAuthToken
 }

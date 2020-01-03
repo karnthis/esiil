@@ -3,11 +3,36 @@
 const Defaults = require('../../defaults')
 const { _basicGet, _sendPathRequest } = require('../../libs/Requests')
 const { _findToken } = require('../../helpers/Token')
+const { _buildRequestURL } = require('./coreHelper')
 
 
 class CoreClass {
   constructor(cfg) {
     this.updateConfig(cfg)
+  }
+
+  dataPack() {
+    return {
+      tokenOptions: {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        auth: `${this.clientID}:${this.clientSecret}`
+      },
+      userAgent: this.userAgent,
+      baseURL: this.baseURL,
+      version: this.version,
+      source: this.source,
+      db: this.db,
+      queryParams: this.queryParams,
+      domainAndVersion: this.domainAndVersion,
+      scopes: this.scopes,
+      state: this.state,
+      callbackURL: this.callbackURL,
+      authedEnabled: this.authedEnabled,
+      clientID: this.clientID,
+      // clientSecret: this.clientSecret
+    }
   }
 
   updateConfig(cfg = {}) {
@@ -20,58 +45,69 @@ class CoreClass {
     this.scopes = cfg.scopes || []
     this.state = cfg.state || ''
 
+    // this.callbackURL = cfg.callbackURL
     this.clientID = cfg.clientID
     this.clientSecret = cfg.clientSecret
+    this.authedEnabled = cfg.authedEnabled
 
 
     this.domainAndVersion = `${this.baseURL}${this.version}`
     this.queryParams = `?datasource=${this.source}`
 
-    this.dataPack = {
-      tokenOptions: {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        auth: `${cfg.clientID}:${cfg.clientSecret}`
-      },
-      userAgent: this.userAgent,
-      baseURL: this.baseURL,
-      version: this.version,
-      source: this.source,
-      db: this.db,
-      queryParams: this.queryParams,
-      domainAndVersion: this.domainAndVersion,
-      // scopes: this.scopes,
-      // state: this.state,
-      // authedEnabled: this.authedEnabled,
-      // clientID: this.clientID,
-      // clientSecret: this.clientSecret
-    }
     // this.dataPack = {
+    //   tokenOptions: {
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     auth: `${cfg.clientID}:${cfg.clientSecret}`
+    //   },
     //   userAgent: this.userAgent,
-    //   domainAndVersion: this.domainAndVersion,
+    //   baseURL: this.baseURL,
+    //   version: this.version,
+    //   source: this.source,
+    //   db: this.db,
     //   queryParams: this.queryParams,
-    //   db: this.db
+    //   domainAndVersion: this.domainAndVersion,
+    //   scopes: this.scopes,
+    //   state: this.state,
+    //   authedEnabled: this.authedEnabled,
+    //   clientID: this.clientID,
+    //   clientSecret: this.clientSecret
     // }
-    
-    if (!cfg.clientID || !cfg.clientSecret) {
-      console.log(cfg.clientID)
-      console.log(cfg.clientSecret)
-      console.log('Missing clientID or clientSecret, authenticated methods disabled')
-      //TODO add disabling of authed routes
-      this.authedEnabled = false
-    } else {
-      this.authedEnabled = true
-      this.clientID = cfg.clientID
-
-      this.tokenOptions = {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        auth: `${cfg.clientID}:${cfg.clientSecret}`
-      }
-      // this.clientSecret = cfg.clientSecret
+    this.authBundle = {
+      scopes: this.scopes,
+      state: this.state,
+      authedEnabled: this.authedEnabled,
+      callbackURL: this.callbackURL,
+      clientID: this.clientID,
+      clientSecret: this.clientSecret
     }
+    if (cfg.requestURL) {
+      this.requestURL = cfg.requestURL
+    } else {
+      if (!cfg.clientID || !cfg.clientSecret) {
+        console.log(cfg.clientID)
+        console.log(cfg.clientSecret)
+        // console.log('Missing clientID or clientSecret, authenticated methods disabled')
+        this.authedEnabled = false
+        //TODO add disabling of authed routes
+        throw new Error('Missing clientID or clientSecret, authenticated methods disabled')
+      } else if (this.authBundle.scopes.length == 0) {
+        throw new Error('Must have at least 1 scope selected')
+      } else {
+        this.authedEnabled = true
+        this.requestURL = _buildRequestURL(this.authBundle)
+
+        // this.tokenOptions = {
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   auth: `${cfg.clientID}:${cfg.clientSecret}`
+        // }
+        // this.clientSecret = cfg.clientSecret
+      }
+    }
+    
   }
 }
 

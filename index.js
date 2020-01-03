@@ -1,5 +1,7 @@
 'use strict'
 
+const { _buildRequestURL, _processAuthToken } = require('./indexHelper')
+
 const Core = require('./classes/Core')
 const SQLEngine = require('./libs/Database')
 
@@ -25,7 +27,6 @@ const Corp = require('./classes/Corp')
 // const UI = require('./classes/UI')
 
 class ESIIL extends Core.CoreClass {
-  // class ESIIL {
   constructor(cfg) {
     super(cfg)
     this.instances = []
@@ -38,8 +39,11 @@ class ESIIL extends Core.CoreClass {
     })
   }
 
-  readThis() {
-    console.dir(this)
+  authRequestURL() {
+    return this.requestURL
+  }
+  receiveAuthCode(authCode) {
+    return _processAuthToken(this.dataPack, authCode)
   }
 
   newAlliance() {
@@ -61,7 +65,6 @@ class ESIIL extends Core.CoreClass {
 
 
 function init(cfg) {
-  // console.log('great success')
   return new ESIIL(cfg)
 }
 
