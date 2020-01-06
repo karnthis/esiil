@@ -30,10 +30,12 @@ function _buildRequestURL(bundle) {
 
 async function _processAuthToken(bundle, authToken = '') {
   const expiration = _nowInSeconds() + 1200
-  const payload = JSON.stringify({
+  const payload = {
+    // const payload = JSON.stringify({
       "grant_type":"authorization_code",
       "code":authToken
-    })
+    }
+  // })
   const { access_token, refresh_token } = await _tokenExchange(bundle.tokenOptions, payload, {userAgent: bundle.userAgent})
     .then(res => {
       return res.body

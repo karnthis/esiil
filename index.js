@@ -43,7 +43,7 @@ class ESIIL extends Core.CoreClass {
     return this.requestURL
   }
   receiveAuthCode(authCode) {
-    return _processAuthToken(this.dataPack, authCode)
+    return _processAuthToken(this.dataPack(), authCode)
   }
 
   newAlliance() {

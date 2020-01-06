@@ -5,11 +5,13 @@ const { oauthURL } = require('../../defaults')
 
 function _buildRequestURL(bundle) {
   if (bundle.state.includes('&')) console.error(`Request URL state: Must not contain '&' symbol. Sanitizing...`)
-  return [`${oauthURL}/authorize/?response_type=code`,
-    `redirect_uri=${encodeURI(bundle.callbackURL)}`,
-    `clientID=${bundle.clientID}`,
-    `scope=${bundle.scopes.join(' ')}`,
-    `state=${bundle.state.replace(/&/g, '')}`
+  const theState = bundle.state.replace(/&/g, '') || 'default'
+  return `${oauthURL}/authorize/?` + [`response_type=code`,
+    `redirect_uri=${encodeURIComponent(bundle.callbackURL)}`,
+    // `redirect_uri=${bundle.callbackURL}`,
+    `client_id=${bundle.clientID}`,
+    `scope=${encodeURIComponent(bundle.scopes.join(' '))}`,
+    `state=${theState}`
   ].join('&')
 }
 

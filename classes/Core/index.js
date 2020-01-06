@@ -45,7 +45,7 @@ class CoreClass {
     this.scopes = cfg.scopes || []
     this.state = cfg.state || ''
 
-    // this.callbackURL = cfg.callbackURL
+    this.callbackURL = cfg.callbackURL
     this.clientID = cfg.clientID
     this.clientSecret = cfg.clientSecret
     this.authedEnabled = cfg.authedEnabled

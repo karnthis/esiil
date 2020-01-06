@@ -4,9 +4,9 @@ const { oauthURL } = require('../defaults')
 const { _sendCustomRequest } = require('../libs/Requests')
 const { _nowInSeconds } = require('./Time')
 
-function _tokenExchange(data, options, payload) {
-  options.method = 'POST'
-  return _sendCustomRequest(`${oauthURL}/token`, options, payload, data)
+function _tokenExchange(tokenOptions, payload, userAgentObj) {
+  tokenOptions.method = 'POST'
+  return _sendCustomRequest(`${oauthURL}/token`, tokenOptions, payload, userAgentObj)
 }
 
 async function _findToken(bundle, toonID) {
