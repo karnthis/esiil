@@ -1,14 +1,16 @@
-const { basicGet, sendPathRequest, sendCustomRequest } = require('./Requests')
-const { nowInSeconds, tokenExchange } = require('../libs/Misc')
-const SQLEngine = require('./Database')
+const { basicGet, sendPathRequest, sendCustomRequest } = require('../../libs/Requests')
+const { nowInSeconds, tokenExchange } = require('../../libs/helpers/Misc')
+const SQLEngine = require('../../libs/Database')
 
 
 module.exports = class Core {
   constructor(cfg = {}) {
     this.userAgent = cfg.agent || 'ESIIO-Default/0.x'
-    this.baseURL = cfg.base || 'https://esi.evetech.net/' // should not be overrode
     this.version = cfg.ver || 'latest/' // latest || dev || legacy
     this.source = cfg.src || 'tranquility' // tranquility || singularity
+    
+    this.baseURL = 'https://esi.evetech.net/'
+
 
     this.domainAndVersion = `${this.baseURL}${this.version}`
     this.queryParams = `?datasource=${this.source}`
@@ -27,9 +29,21 @@ module.exports = class Core {
     }
   }
 
+  share() {
+    return {
+      base: this.baseURL,
+      ver: this.version,
+      src: this.source,
+      agent: this.userAgent,
+      db: this.db,
+      clientID: this.clientID,
+      clientSecret: this.clientSecret
+    }
+  }
+
   // **** FUNCTIONS **** \\
-  _makePublicGet(path, extras) {
-    return (extras) ? basicGet(path, extras, this.dataPack) : basicGet(path, this.dataPack)
+  _makePublicGet(path, extraParams) {
+    return basicGet(path, this.dataPack, extraParams)
   }
   _makePublicPost(path, payload) {
     const options = {
@@ -43,13 +57,10 @@ module.exports = class Core {
 
   async _findToken(toonID) {
     let { access_token, expires, refresh_token } = await this.db.toon2token2(toonID)
-    // console.log('token: ',access_token)
     if (nowInSeconds() >= expires) {
     console.log('refresh hit')
-    // console.dir(refresh_token)
     access_token = await this._refreshToken(refresh_token)
     }
-    // console.log(access_token)
     return access_token
   }
 
@@ -106,14 +117,12 @@ module.exports = class Core {
         "grant_type":"refresh_token",
         "refresh_token":_refreshToken
       })
-    const { access_token, refresh_token } = await tokenExchange(this.tokenOptions, payload, {userAgent: this.userAgent})
+    const { access_token, refresh_token } = await tokenExchange({userAgent: this.userAgent}, this.tokenOptions, payload)
       .then(res => res.body)
       .catch(err => {
         console.error(err)
         throw new Error(err)
       })
-      // console.log('in refresh')
-      // console.log(access_token)
     const _ = await this.db.saveRefreshedToken(access_token, expiration, refresh_token)
     return access_token
   }

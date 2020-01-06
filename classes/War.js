@@ -12,11 +12,11 @@ module.exports = class ddd extends Core {
   wars() {
     return this._makePublicGet(`wars/`)
   }
-  war(war_id) {
-    return this._makePublicGet(`wars/${war_id}/`)
+  war(warID) {
+    return this._makePublicGet(`wars/${warID}/`)
   }
-  warKillmails(war_id) {
-    return this._makePublicGet(`wars/${war_id}/killmails/`)
+  warKillmails(warID) {
+    return this._makePublicGet(`wars/${warID}/killmails/`)
   }
 
   // RESTRICTED

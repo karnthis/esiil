@@ -15,16 +15,16 @@ module.exports = class ddd extends Core {
   insurance() {
     return this._makePublicGet(`insurance/prices/`)
   }
-  lpStore(corporation_id) {
-    return this._makePublicGet(`loyalty/stores/${corporation_id}/offers/`)
+  lpStore(corporationID) {
+    return this._makePublicGet(`loyalty/stores/${corporationID}/offers/`)
   }
-  oneKillmail(killmail_id, killmail_hash) {
-    return this._makePublicGet(`killmails/${killmail_id}/${killmail_hash}/`)
+  oneKillmail(killmailID, killmail_hash) {
+    return this._makePublicGet(`killmails/${killmailID}/${killmail_hash}/`)
   }
-  route(origin_id, destination_id) {
-    return this._makePublicGet(`route/${origin_id}/${destination_id}/`)
+  route(originID, destinationID) {
+    return this._makePublicGet(`route/${originID}/${destinationID}/`)
   }
-  seach() {
+  search() {
     return this._makePublicGet(`search/`)
   }
   status() {
