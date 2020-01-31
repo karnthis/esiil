@@ -1,54 +1,44 @@
-const { get, request } = require('https')
-const { URL } = require('./Validate')
+'use strict'
 
+const { request } = require('https')
+const { _isURL } = require('../helpers/Validation')
+const { _cleanURL } = require('./RequestsHelpers')
 
 module.exports = {
 
-  basicGet(path, extras = [], data) {
+  _basicGet(path, data, extraParams = []) {
     const options = {
       method: 'GET',
       headers: {
         'User-Agent': data.userAgent
       }
     }
-    const partUrl = `${data.urlPt1}${cleanURL(path)}${data.urlPt2}`
-    const url = [partUrl, ...extras].join('&')
-    return allRequest(url, options)
+    const partUrl = `${data.domainAndVersion}${_cleanURL(path)}${data.queryParams}`
+    const url = [partUrl, ...extraParams].join('&')
+    return _allRequest(url, options)
   },
-  sendPathRequest(path, options = {}, data, payload = '') {
+  //TODO clean up arg order
+  _sendPathRequest(path, options = {}, data, payload = '') {
     options.headers = options.headers || {}
     options.headers['User-Agent'] = data.userAgent
-    const url = `${data.urlPt1}${cleanURL(path)}${data.urlPt2}`
-    return allRequest(url, options, payload)
+    const url = `${data.domainAndVersion}${_cleanURL(path)}${data.queryParams}`
+    return _allRequest(url, options, payload)
   },
-  sendCustomRequest(url, options = {}, payload = '', data) {
+  _sendCustomRequest(url, options = {}, payload = '', data) {
     options.headers = options.headers || {}
     options.headers['User-Agent'] = data.userAgent
-    return allRequest(url, options, payload)
+    return _allRequest(url, options, payload)
   },
-  sendTokenRequest(url, options = {}) {
-    return allRequest(url, options)
+  _sendTokenRequest(url, options = {}) {
+    return _allRequest(url, options)
   }  
 }
 
-function cleanURL(s) {
-  while (s.indexOf('/') === 0) {
-    s = s.slice(1)
-  }
-  return s
-}
-
-function allRequest(url, options, payload) {
-  // console.dir(url)
-  // console.dir(options)
-  // console.dir(payload)
+function _allRequest(url, options, payload) {
   return new Promise((resolve, reject) => {
-    if (URL(url)) {
+    if (_isURL(url)) {
       console.log(url)
       const req = request(url, options, (res) => {
-        // console.dir('req.getHeaders')
-        // console.dir(req.getHeaders())
-        // console.dir('end req.getHeaders')
         res.setEncoding('utf8');
         const resBody = []
         const status = res.statusCode
@@ -57,15 +47,13 @@ function allRequest(url, options, payload) {
           resBody.push(data)
         })
         res.on('end', () => {
-          // console.dir(resBody)
           resolve({
             body: JSON.parse(resBody.join('')),
             status
           })
         })
       })
-      // if (payload) req.write(JSON.stringify(payload))
-      if (payload) req.write(payload)
+      if (payload) req.write(JSON.stringify(payload))
       req.on('error', function (err) {
         reject(err)
       })

@@ -1,6 +1,6 @@
 {
-  "name": "esiio",
-  "version": "0.1.2",
+  "name": "esiil",
+  "version": "0.2.0",
   "description": "Single dependency library for EVE Online's ESI",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/karnthis/esiio"
+    "url": "https://github.com/karnthis/esiil"
   },
   "keywords": [
     "eve",
@@ -17,8 +17,8 @@
     "ESI"
   ],
   "author": "Erin Rivas <me@erinrivas.com>",
-  "homepage": "https://github.com/karnthis/esiio#readme",
-	"bugs": "https://github.com/karnthis/esiio/issues",
+  "homepage": "https://github.com/karnthis/esiil#readme",
+	"bugs": "https://github.com/karnthis/esiil/issues",
   "license": "MIT",
   "readmeFilename": "readme.md",
   "dependencies": {
