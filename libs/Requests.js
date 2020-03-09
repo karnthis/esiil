@@ -2,26 +2,25 @@
 
 const { request } = require('https')
 const { _isURL } = require('../helpers/Validation')
-const { _cleanURL } = require('./RequestsHelpers')
+const { _cleanURL, _paramsToString } = require('./RequestsHelpers')
 
 module.exports = {
 
-  _basicGet(path, data, extraParams = []) {
+  _basicGet(path, extraParams = {}, data) {
     const options = {
       method: 'GET',
       headers: {
         'User-Agent': data.userAgent
       }
     }
-    const partUrl = `${data.domainAndVersion}${_cleanURL(path)}${data.queryParams}`
-    const url = [partUrl, ...extraParams].join('&')
+    const url = `${data.domainAndVersion}${_cleanURL(path)}${data.queryParamStart}${_paramsToString(extraParams)}`
     return _allRequest(url, options)
   },
   //TODO clean up arg order
-  _sendPathRequest(path, options = {}, data, payload = '') {
+  _sendPathRequest(path, extraParams = {}, options = {}, data, payload = '') {
     options.headers = options.headers || {}
     options.headers['User-Agent'] = data.userAgent
-    const url = `${data.domainAndVersion}${_cleanURL(path)}${data.queryParams}`
+    const url = `${data.domainAndVersion}${_cleanURL(path)}${data.queryParamStart}${_paramsToString(extraParams)}`
     return _allRequest(url, options, payload)
   },
   _sendCustomRequest(url, options = {}, payload = '', data) {
@@ -41,15 +40,19 @@ function _allRequest(url, options, payload) {
       const req = request(url, options, (res) => {
         res.setEncoding('utf8');
         const resBody = []
-        const status = res.statusCode
-        console.dir(status)
         res.on('data', (data) => {
           resBody.push(data)
         })
         res.on('end', () => {
           resolve({
             body: JSON.parse(resBody.join('')),
-            status
+            status: res.statusCode,
+            etag: res.headers.etag,
+            expires: res.headers.expires,
+            lastModified: res.headers['last-modified'],
+            xPages: res.headers['x-pages'],
+            xErrorLimitRemain: res.headers['x-esi-error-limit-remain'],
+            xErrorLimitReset: res.headers['x-esi-error-limit-reset']
           })
         })
       })
