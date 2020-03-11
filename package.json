@@ -1,7 +1,7 @@
 {
   "name": "esiil",
-  "version": "0.2.0",
-  "description": "Single dependency library for EVE Online's ESI",
+  "version": "0.3.0",
+  "description": "Single dependency library for EVE Online's ESI *Beta*",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

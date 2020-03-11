@@ -10,23 +10,23 @@ module.exports = class Market extends Core.CoreClass {
     super(cfg)
   }
 
-  groups() {
-    return _groups(this.dataPack())
+  groups(extraParameters) {
+    return _groups(this.dataPack(), extraParameters)
   }
-  prices() {
-    return _prices(this.dataPack())
+  prices(extraParameters) {
+    return _prices(this.dataPack(), extraParameters)
   }
-  history(regionID) {
-    return _history(this.dataPack(), regionID)
+  history(regionID, extraParameters) {
+    return _history(this.dataPack(), regionID, extraParameters)
   }
-  types(regionID) {
-    return _types(this.dataPack(), regionID)
+  types(regionID, extraParameters) {
+    return _types(this.dataPack(), regionID, extraParameters)
   }
-  group(market_groupID) {
-    return _group(this.dataPack(), market_groupID)
+  group(marketGroupID, extraParameters) {
+    return _group(this.dataPack(), marketGroupID, extraParameters)
   }
-  orders(regionID, extras) {
-    return _orders(this.dataPack(), regionID, extras)
+  orders(regionID, extraParameters) {
+    return _orders(this.dataPack(), regionID, extraParameters)
   }
 }
 

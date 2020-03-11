@@ -3,20 +3,20 @@
 const { _makePublicGet } = require('../Core')
 const { basePath } = require('./dogmaHelper')
 
-function _allAttributes(dataPack) {
-  return _makePublicGet(dataPack, `${basePath}/attributes/`)
+function _allAttributes(dataPack, extraParameters) {
+  return _makePublicGet(dataPack, `${basePath}/attributes/`, extraParameters)
 }
-function _oneAttribute(dataPack, attributeID) {
-  return _makePublicGet(dataPack, `${basePath}/attributes/${attributeID}/`)
+function _oneAttribute(dataPack, attributeID, extraParameters) {
+  return _makePublicGet(dataPack, `${basePath}/attributes/${attributeID}/`, extraParameters)
 }
-function _allEffects(dataPack) {
-  return _makePublicGet(dataPack, `${basePath}/effects/`)
+function _allEffects(dataPack, extraParameters) {
+  return _makePublicGet(dataPack, `${basePath}/effects/`, extraParameters)
 }
-function _oneEffect(dataPack, effectID) {
-  return _makePublicGet(dataPack, `${basePath}/effects/${effectID}/`)
+function _oneEffect(dataPack, effectID, extraParameters) {
+  return _makePublicGet(dataPack, `${basePath}/effects/${effectID}/`, extraParameters)
 }
-function _dynamic(dataPack, typeID, itemID) {
-  return _makePublicGet(dataPack, `${basePath}/dynamic/items/${typeID}/${itemID}/`)
+function _dynamic(dataPack, typeID, itemID, extraParameters) {
+  return _makePublicGet(dataPack, `${basePath}/dynamic/items/${typeID}/${itemID}/`, extraParameters)
 }
 
 

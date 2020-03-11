@@ -10,14 +10,14 @@ module.exports = class War extends Core.CoreClass {
     super(cfg)
   }
 
-  all() {
-    return _all(this.dataPack())
+  all(extraParameters) {
+    return _all(this.dataPack(), extraParameters)
   }
-  one(warID) {
-    return _one(this.dataPack(), warID)
+  one(warID, extraParameters) {
+    return _one(this.dataPack(), warID, extraParameters)
   }
-  killmails(warID) {
-    return _killmails(this.dataPack(), warID)
+  killmails(warID, extraParameters) {
+    return _killmails(this.dataPack(), warID, extraParameters)
   }
 }
 

@@ -10,26 +10,26 @@ module.exports = class General extends Core.CoreClass {
     super(cfg)
   }
 
-  incursions() {
-    return _incursions(this.dataPack())
+  incursions(extraParameters) {
+    return _incursions(this.dataPack(), extraParameters)
   }
-  insurance() {
-    return _insurance(this.dataPack())
+  insurance(extraParameters) {
+    return _insurance(this.dataPack(), extraParameters)
   }
-  search() {
-    return _search(this.dataPack())
+  search(extraParameters) {
+    return _search(this.dataPack(), extraParameters)
   }
-  status() {
-    return _status(this.dataPack())
+  status(extraParameters) {
+    return _status(this.dataPack(), extraParameters)
   }
-  lpStore(corporationID) {
-    return _lpStore(this.dataPack(), corporationID)
+  lpStore(corporationID, extraParameters) {
+    return _lpStore(this.dataPack(), corporationID, extraParameters)
   }
-  oneKillmail(killmailID, killmailHash) {
-    return _oneKillmail(this.dataPack(), killmailID, killmailHash)
+  oneKillmail(killmailID, killmailHash, extraParameters) {
+    return _oneKillmail(this.dataPack(), killmailID, killmailHash, extraParameters)
   }
-  route(originID, destinationID) {
-    return _route(this.dataPack(), originID, destinationID)
+  route(originID, destinationID, extraParameters) {
+    return _route(this.dataPack(), originID, destinationID, extraParameters)
   }
 }
 

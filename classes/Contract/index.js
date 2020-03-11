@@ -10,13 +10,13 @@ module.exports = class Contract extends Core.CoreClass {
     super(cfg)
   }
 
-  allInRegion(input) {
-    return _allInRegion(this.dataPack(), input)
+  allInRegion(regionID, extraParameters) {
+    return _allInRegion(this.dataPack(), regionID, extraParameters)
   }
-  oneBids(input) {
-    return _oneBids(this.dataPack(), input)
+  bids(contractID, extraParameters) {
+    return _oneBids(this.dataPack(), contractID, extraParameters)
   }
-  oneItems(input) {
-    return _oneItems(this.dataPack(), input)
+  items(contractID, extraParameters) {
+    return _oneItems(this.dataPack(), contractID, extraParameters)
   }
 }

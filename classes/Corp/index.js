@@ -10,89 +10,89 @@ module.exports = class Corp extends Core.CoreClass {
     super(cfg)
   }
 
-  one(input) {
-    return _one(this.dataPack(), input)
+  one(corporationID, extraParameters) {
+    return _one(this.dataPack(), corporationID, extraParameters)
   }
-  allianceHistory(input) {
-    return _allianceHistory(this.dataPack(), input)
+  allianceHistory(corporationID, extraParameters) {
+    return _allianceHistory(this.dataPack(), corporationID, extraParameters)
   }
-  images(input) {
-    return _images(this.dataPack(), input)
+  images(corporationID, extraParameters) {
+    return _images(this.dataPack(), corporationID, extraParameters)
   }
-  npc() {
-    return _npc(this.dataPack())
+  npc(extraParameters) {
+    return _npc(this.dataPack(), extraParameters)
   }
 
-  assets(corp, toon) {
-    return authFuncs._assets(this.dataPack(), corp, toon)
+  assets(corp, authenticatedToon, extraParameters) {
+    return authFuncs._assets(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  assetLocations(corp, toon, items) {
-    return authFuncs._assetLocations(this.dataPack(), corp, items, toon)
+  assetLocations(corp, authenticatedToon, items) {
+    return authFuncs._assetLocations(this.dataPack(), corp, items, authenticatedToon, extraParameters)
   }
-  assetNames(corp, toon, items) {
-    return authFuncs._assetNames(this.dataPack(), corp, items, toon)
+  assetNames(corp, authenticatedToon, items) {
+    return authFuncs._assetNames(this.dataPack(), corp, items, authenticatedToon, extraParameters)
   }
-  blueprints(corp, toon) {
-    return authFuncs._blueprints(this.dataPack(), corp, toon)
+  blueprints(corp, authenticatedToon, extraParameters) {
+    return authFuncs._blueprints(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  bookmarks(corp, toon) {
-    return authFuncs._bookmarks(this.dataPack(), corp, toon)
+  bookmarks(corp, authenticatedToon, extraParameters) {
+    return authFuncs._bookmarks(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  bookmarkFolders(corp, toon) {
-    return authFuncs._bookmarkFolders(this.dataPack(), corp, toon)
+  bookmarkFolders(corp, authenticatedToon, extraParameters) {
+    return authFuncs._bookmarkFolders(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  contacts(corp, toon) {
-    return authFuncs._contacts(this.dataPack(), corp, toon)
+  contacts(corp, authenticatedToon, extraParameters) {
+    return authFuncs._contacts(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  contractBids(corp, toon, contract) {
-    return authFuncs._contractBids(this.dataPack(), corp, contract, toon)
+  contractBids(corp, authenticatedToon, contract, extraParameters) {
+    return authFuncs._contractBids(this.dataPack(), corp, contract, authenticatedToon, extraParameters)
   }
-  contractItems(corp, toon, contract) {
-    return authFuncs._contractItems(this.dataPack(), corp, contract, toon)
+  contractItems(corp, authenticatedToon, contract, extraParameters) {
+    return authFuncs._contractItems(this.dataPack(), corp, contract, authenticatedToon, extraParameters)
   }
-  divisions(corp, toon) {
-    return authFuncs._divisions(this.dataPack(), corp, toon)
+  divisions(corp, authenticatedToon, extraParameters) {
+    return authFuncs._divisions(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  facilities(corp, toon) {
-    return authFuncs._facilities(this.dataPack(), corp, toon)
+  facilities(corp, authenticatedToon, extraParameters) {
+    return authFuncs._facilities(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  factionWarfare(corp, toon) {
-    return authFuncs._factionWarfare(this.dataPack(), corp, toon)
+  factionWarfare(corp, authenticatedToon, extraParameters) {
+    return authFuncs._factionWarfare(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  medals(corp, toon) {
-    return authFuncs._medals(this.dataPack(), corp, toon)
+  medals(corp, authenticatedToon, extraParameters) {
+    return authFuncs._medals(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  medalsIssued(corp, toon) {
-    return authFuncs._medalsIssued(this.dataPack(), corp, toon)
+  medalsIssued(corp, authenticatedToon, extraParameters) {
+    return authFuncs._medalsIssued(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  members(corp, toon) {
-    return authFuncs._members(this.dataPack(), corp, toon)
+  members(corp, authenticatedToon, extraParameters) {
+    return authFuncs._members(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  memberLimit(corp, toon) {
-    return authFuncs._memberLimit(this.dataPack(), corp, toon)
+  memberLimit(corp, authenticatedToon, extraParameters) {
+    return authFuncs._memberLimit(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  memberTitles(corp, toon) {
-    return authFuncs._memberTitles(this.dataPack(), corp, toon)
+  memberTitles(corp, authenticatedToon, extraParameters) {
+    return authFuncs._memberTitles(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  memberTracking(corp, toon) {
-    return authFuncs._memberTracking(this.dataPack(), corp, toon)
+  memberTracking(corp, authenticatedToon, extraParameters) {
+    return authFuncs._memberTracking(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  roles(corp, toon) {
-    return authFuncs._roles(this.dataPack(), corp, toon)
+  roles(corp, authenticatedToon, extraParameters) {
+    return authFuncs._roles(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  shareholders(corp, toon) {
-    return authFuncs._shareholders(this.dataPack(), corp, toon)
+  shareholders(corp, authenticatedToon, extraParameters) {
+    return authFuncs._shareholders(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  standings(corp, toon) {
-    return authFuncs._standings(this.dataPack(), corp, toon)
+  standings(corp, authenticatedToon, extraParameters) {
+    return authFuncs._standings(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  starbases(corp, toon, starbase) {
-    return authFuncs._starbases(this.dataPack(), corp, starbase, toon)
+  starbases(corp, authenticatedToon, starbase, extraParameters) {
+    return authFuncs._starbases(this.dataPack(), corp, starbase, authenticatedToon, extraParameters)
   }
-  structures(corp, toon) {
-    return authFuncs._structures(this.dataPack(), corp, toon)
+  structures(corp, authenticatedToon, extraParameters) {
+    return authFuncs._structures(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
-  titles(corp, toon) {
-    return authFuncs._titles(this.dataPack(), corp, toon)
+  titles(corp, authenticatedToon, extraParameters) {
+    return authFuncs._titles(this.dataPack(), corp, authenticatedToon, extraParameters)
   }
 }

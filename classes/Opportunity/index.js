@@ -10,17 +10,17 @@ module.exports = class Opportunity extends Core.CoreClass {
     super(cfg)
   }
 
-  groups() {
-    return _groups(this.dataPack())
+  groups(extraParameters) {
+    return _groups(this.dataPack(), extraParameters)
   }
-  group(groupID) {
-    return _group(this.dataPack(), groupID)
+  group(groupID, extraParameters) {
+    return _group(this.dataPack(), groupID, extraParameters)
   }
-  tasks() {
-    return _tasks(this.dataPack())
+  tasks(extraParameters) {
+    return _tasks(this.dataPack(), extraParameters)
   }
-  task(taskID) {
-    return _task(this.dataPack(), taskID)
+  task(taskID, extraParameters) {
+    return _task(this.dataPack(), taskID, extraParameters)
   }
 }
 

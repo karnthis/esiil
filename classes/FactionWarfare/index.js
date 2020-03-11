@@ -10,23 +10,23 @@ module.exports = class FactionWarfare extends Core.CoreClass {
     super(cfg)
   }
 
-  factionLeaderboard() {
-    return _factionLeaderboard(this.dataPack())
+  factionLeaderboard(extraParameters) {
+    return _factionLeaderboard(this.dataPack(), extraParameters)
   }
-  characterLeaderboard() {
-    return _characterLeaderboard(this.dataPack())
+  characterLeaderboard(extraParameters) {
+    return _characterLeaderboard(this.dataPack(), extraParameters)
   }
-  corporationLeaderboard() {
-    return _corporationLeaderboard(this.dataPack())
+  corporationLeaderboard(extraParameters) {
+    return _corporationLeaderboard(this.dataPack(), extraParameters)
   }
-  stats() {
-    return _stats(this.dataPack())
+  stats(extraParameters) {
+    return _stats(this.dataPack(), extraParameters)
   }
-  systems() {
-    return _systems(this.dataPack())
+  systems(extraParameters) {
+    return _systems(this.dataPack(), extraParameters)
   }
-  wars() {
-    return _wars(this.dataPack())
+  wars(extraParameters) {
+    return _wars(this.dataPack(), extraParameters)
   }
 }
 
