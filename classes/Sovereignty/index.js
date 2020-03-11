@@ -10,14 +10,14 @@ module.exports = class Sovereignty extends Core.CoreClass {
     super(cfg)
   }
 
-  campaigns() {
-    return _campaigns(this.dataPack())
+  campaigns(extraParameters) {
+    return _campaigns(this.dataPack(), extraParameters)
   }
-  map() {
-    return _map(this.dataPack())
+  map(extraParameters) {
+    return _map(this.dataPack(), extraParameters)
   }
-  structures() {
-    return _structures(this.dataPack())
+  structures(extraParameters) {
+    return _structures(this.dataPack(), extraParameters)
   }
 }
 

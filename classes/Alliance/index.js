@@ -23,11 +23,11 @@ module.exports = class Alliance extends Core.CoreClass {
     return _images(this.dataPack(), input)
   }
 
-  contacts(alliance, authenticatedToon) {
-    return _contacts(this.dataPack(), alliance, authenticatedToon)
+  contacts(alliance, authenticatedToon, extraParams) {
+    return _contacts(this.dataPack(), alliance, authenticatedToon, extraParams)
   }
-  contactLabels(alliance, authenticatedToon) {
-    return _contactLabels(this.dataPack(), alliance, authenticatedToon)
+  contactLabels(alliance, authenticatedToon, extraParams) {
+    return _contactLabels(this.dataPack(), alliance, authenticatedToon, extraParams)
   }
 }
 

@@ -9,16 +9,16 @@ module.exports = class Calendar extends Core.CoreClass {
     super(cfg)
   }
   // RESTRICTED
-  all(toon) {
-    return _all(this.dataPack(), toon, toon)
+  all(authenticatedToon, extraParameters) {
+    return _all(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  one(toon, event) {
-    return _one(this.dataPack(), toon, event, toon)
+  one(authenticatedToon, event, extraParameters) {
+    return _one(this.dataPack(), authenticatedToon, event, authenticatedToon, extraParameters)
   }
-  attendees(toon, event) {
-    return _attendees(this.dataPack(), toon, event, toon)
+  attendees(authenticatedToon, event, extraParameters) {
+    return _attendees(this.dataPack(), authenticatedToon, event, authenticatedToon, extraParameters)
   }
-  respond(toon, event, eventResponse) {
-    return _respond(this.dataPack(), toon, event, eventResponse, toon)
+  respond(authenticatedToon, event, eventResponse, extraParameters) {
+    return _respond(this.dataPack(), authenticatedToon, event, eventResponse, authenticatedToon, extraParameters)
   }
 }

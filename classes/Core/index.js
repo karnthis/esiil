@@ -81,7 +81,7 @@ class CoreClass {
 }
 
 // **** FUNCTIONS **** \\
-function _makePublicGet(dataPack, path, extraParams) {
+function _makePublicGet(dataPack, path, extraParams = {}) {
   return _basicGet(path, extraParams, dataPack)
 }
 function _makePublicPost(dataPack, path, payload, extraParams = {}) {
@@ -114,10 +114,11 @@ async function _makeAuthedPost(dataPack, path, payload, toonID, extraParams = {}
       'Authorization': `Bearer ${access_token}`
     },
   }
+
   return _sendPathRequest(path, extraParams, options, dataPack, payload)
 }
 //TODO finish real logic
-async function _makeAuthedPut(path, payload, toonID, extraParams = {}) {
+async function _makeAuthedPut(dataPack, path, payload, toonID, extraParams = {}) {
   const access_token = await _findToken(dataPack, toonID)
   const options = {
     method: 'PUT',
