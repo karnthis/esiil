@@ -10,11 +10,11 @@ module.exports = class Universe extends Core.CoreClass {
     super(cfg)
   }
 
-  piSchematics(schematicsID) {
-    return _piSchematics(this.dataPack(), schematicsID)
+  piSchematics(schematicsID, extraParameters) {
+    return _piSchematics(this.dataPack(), schematicsID, extraParameters)
   }
-  name2ID(names) {
-    return _name2ID(this.dataPack(), names)
+  name2ID(namesArray, extraParameters) {
+    return _name2ID(this.dataPack(), namesArray, extraParameters)
   }
 
 }

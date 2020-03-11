@@ -10,111 +10,111 @@ module.exports = class Character extends Core.CoreClass {
     super(cfg)
   }
 
-  one(input) {
-    return _one(this.dataPack(), input)
+  one(toon, extraParameters) {
+    return _one(this.dataPack(), toon, extraParameters)
   }
-  history(input) {
-    return _history(this.dataPack(), input)
+  history(toon, extraParameters) {
+    return _history(this.dataPack(), toon, extraParameters)
   }
-  images(input) {
-    return _images(this.dataPack(), input)
+  images(toon, extraParameters) {
+    return _images(this.dataPack(), toon, extraParameters)
   }
-  affiliation(input) {
-    return _affiliation(this.dataPack(), input)
+  affiliation(toonsArray, extraParameters) {
+    return _affiliation(this.dataPack(), toonsArray, extraParameters)
   }
 
-  assets(toon) {
-    return authFuncs._assets(this.dataPack(), toon, '', toon)
+  assets(authenticatedToon, extraParameters) {
+    return authFuncs._assets(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  assetLocations(toon, items) {
-    return authFuncs._assetLocations(this.dataPack(), toon, items, toon)
+  assetLocations(authenticatedToon, items, extraParameters) {
+    return authFuncs._assetLocations(this.dataPack(), authenticatedToon, items, authenticatedToon, extraParameters)
   }
-  assetNames(toon, items) {
-    return authFuncs._assetNames(this.dataPack(), toon, items, toon)
+  assetNames(authenticatedToon, items, extraParameters) {
+    return authFuncs._assetNames(this.dataPack(), authenticatedToon, items, authenticatedToon, extraParameters)
   }
-  blueprints(toon) {
-    return authFuncs._blueprints(this.dataPack(), toon, toon)
+  blueprints(authenticatedToon, extraParameters) {
+    return authFuncs._blueprints(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  bookmarks(toon) {
-    return authFuncs._bookmarks(this.dataPack(), toon, toon)
+  bookmarks(authenticatedToon, extraParameters) {
+    return authFuncs._bookmarks(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  bookmarkFolders(toon) {
-    return authFuncs._bookmarkFolders(this.dataPack(), toon, toon)
+  bookmarkFolders(authenticatedToon, extraParameters) {
+    return authFuncs._bookmarkFolders(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  clones(toon) {
-    return authFuncs._clones(this.dataPack(), toon, toon)
+  clones(authenticatedToon, extraParameters) {
+    return authFuncs._clones(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  contactLabels(toon) {
-    return authFuncs._contactLabels(this.dataPack(), toon, toon)
+  contactLabels(authenticatedToon, extraParameters) {
+    return authFuncs._contactLabels(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  contracts(toon) {
-    return authFuncs._contracts(this.dataPack(), toon, toon)
+  contracts(authenticatedToon, extraParameters) {
+    return authFuncs._contracts(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  contractBids(toon, contract) {
-    return authFuncs._contractBids(this.dataPack(), toon, contract, toon)
+  contractBids(authenticatedToon, contract, extraParameters) {
+    return authFuncs._contractBids(this.dataPack(), authenticatedToon, contract, authenticatedToon, extraParameters)
   }
-  contractItems(toon, contract) {
-    return authFuncs._contractItems(this.dataPack(), toon, contract, toon)
+  contractItems(authenticatedToon, contract, extraParameters) {
+    return authFuncs._contractItems(this.dataPack(), authenticatedToon, contract, authenticatedToon, extraParameters)
   }
-  cspa(toon, characters) {
-    return authFuncs._cspa(this.dataPack(), toon, characters, toon)
+  cspa(authenticatedToon, toonsArray, extraParameters) {
+    return authFuncs._cspa(this.dataPack(), authenticatedToon, toonsArray, authenticatedToon, extraParameters)
   }
-  factionWarfare(toon) {
-    return authFuncs._factionWarfare(this.dataPack(), toon, toon)
+  factionWarfare(authenticatedToon, extraParameters) {
+    return authFuncs._factionWarfare(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  fatigue(toon) {
-    return authFuncs._fatigue(this.dataPack(), toon, toon)
+  fatigue(authenticatedToon, extraParameters) {
+    return authFuncs._fatigue(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  implants(toon) {
-    return authFuncs._implants(this.dataPack(), toon, toon)
+  implants(authenticatedToon, extraParameters) {
+    return authFuncs._implants(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  lp(toon) {
-    return authFuncs._lp(this.dataPack(), toon, toon)
+  lp(authenticatedToon, extraParameters) {
+    return authFuncs._lp(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  medals(toon) {
-    return authFuncs._medals(this.dataPack(), toon, toon)
+  medals(authenticatedToon, extraParameters) {
+    return authFuncs._medals(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  notifications(toon) {
-    return authFuncs._notifications(this.dataPack(), toon, toon)
+  notifications(authenticatedToon, extraParameters) {
+    return authFuncs._notifications(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  contactNotifications(toon) {
-    return authFuncs._contactNotifications(this.dataPack(), toon, toon)
+  contactNotifications(authenticatedToon, extraParameters) {
+    return authFuncs._contactNotifications(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  opportunities(toon) {
-    return authFuncs._opportunities(this.dataPack(), toon, toon)
+  opportunities(authenticatedToon, extraParameters) {
+    return authFuncs._opportunities(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  planets(toon) {
-    return authFuncs._planets(this.dataPack(), toon, toon)
+  planets(authenticatedToon, extraParameters) {
+    return authFuncs._planets(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  research(toon) {
-    return authFuncs._research(this.dataPack(), toon, toon)
+  research(authenticatedToon, extraParameters) {
+    return authFuncs._research(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  roles(toon) {
-    return authFuncs._roles(this.dataPack(), toon, toon)
+  roles(authenticatedToon, extraParameters) {
+    return authFuncs._roles(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  search(toon) {
-    return authFuncs._search(this.dataPack(), toon, toon)
+  search(authenticatedToon, extraParameters) {
+    return authFuncs._search(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  standings(toon) {
-    return authFuncs._standings(this.dataPack(), toon, toon)
+  standings(authenticatedToon, extraParameters) {
+    return authFuncs._standings(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  stats(toon) {
-    return authFuncs._stats(this.dataPack(), toon, toon)
+  stats(authenticatedToon, extraParameters) {
+    return authFuncs._stats(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  titles(toon) {
-    return authFuncs._titles(this.dataPack(), toon, toon)
+  titles(authenticatedToon, extraParameters) {
+    return authFuncs._titles(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
   
-  getContacts(toon) {
-    return authFuncs._getContacts(this.dataPack(), toon, toon)
+  getContacts(authenticatedToon, extraParameters) {
+    return authFuncs._getContacts(this.dataPack(), authenticatedToon, authenticatedToon, extraParameters)
   }
-  postContacts(toon, contacts) {
-    return authFuncs._postContacts(this.dataPack(), toon, contacts, toon)
+  postContacts(authenticatedToon, contacts, extraParameters) {
+    return authFuncs._postContacts(this.dataPack(), authenticatedToon, contacts, authenticatedToon, extraParameters)
   }
-  putContacts(toon, contacts) {
-    return authFuncs._putContacts(this.dataPack(), toon, contacts, toon)
+  putContacts(authenticatedToon, contacts, extraParameters) {
+    return authFuncs._putContacts(this.dataPack(), authenticatedToon, contacts, authenticatedToon, extraParameters)
   }
-  deleteContacts(toon, contacts) {
-    return authFuncs._deleteContacts(this.dataPack(), toon, contacts, toon)
+  deleteContacts(authenticatedToon, contacts, extraParameters) {
+    return authFuncs._deleteContacts(this.dataPack(), authenticatedToon, contacts, authenticatedToon, extraParameters)
   }
 }

@@ -4,17 +4,17 @@ const { _makePublicGet, _makePublicPost } = require('../Core')
 const { basePath } = require('./characterHelper')
 
 
-function _one(dataPack, characterID) {
-  return _makePublicGet(dataPack, `${basePath}/${characterID}/`)
+function _one(dataPack, characterID, extraParams) {
+  return _makePublicGet(dataPack, `${basePath}/${characterID}/`, extraParams)
 }
-function _history(dataPack, characterID) {
-  return _makePublicGet(dataPack, `${basePath}/${characterID}/corporationhistory/`)
+function _history(dataPack, characterID, extraParams) {
+  return _makePublicGet(dataPack, `${basePath}/${characterID}/corporationhistory/`, extraParams)
 }
-function _images(dataPack, characterID) {
-  return _makePublicGet(dataPack, `${basePath}/${characterID}/portrait/`)
+function _images(dataPack, characterID, extraParams) {
+  return _makePublicGet(dataPack, `${basePath}/${characterID}/portrait/`, extraParams)
 }
-function _affiliation(dataPack, characterIDs) {
-  return _makePublicPost(dataPack, `${basePath}/affiliation/`, characterIDs)
+function _affiliation(dataPack, characterIDs, extraParams) {
+  return _makePublicPost(dataPack, `${basePath}/affiliation/`, characterIDs, extraParams)
 }
 
 module.exports = { _one, _history, _images, _affiliation }

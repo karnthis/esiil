@@ -10,11 +10,11 @@ module.exports = class Industry extends Core.CoreClass {
     super(cfg)
   }
 
-  facilities() {
-    return _facilities(this.dataPack())
+  facilities(extraParameters) {
+    return _facilities(this.dataPack(), extraParameters)
   }
-  systems() {
-    return _systems(this.dataPack())
+  systems(extraParameters) {
+    return _systems(this.dataPack(), extraParameters)
   }
 }
 

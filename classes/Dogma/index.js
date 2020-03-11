@@ -10,19 +10,19 @@ module.exports = class Dogma extends Core.CoreClass {
     super(cfg)
   }
 
-  allAttributes() {
-    return _allAttributes(this.dataPack())
+  allAttributes(extraParameters) {
+    return _allAttributes(this.dataPack(), extraParameters)
   }
-  allEffects() {
-    return _allEffects(this.dataPack())
+  allEffects(extraParameters) {
+    return _allEffects(this.dataPack(), extraParameters)
   }
-  oneAttribute(input) {
-    return _oneAttribute(this.dataPack(), input)
+  oneAttribute(attributeID, extraParameters) {
+    return _oneAttribute(this.dataPack(), attributeID, extraParameters)
   }
-  oneEffect(input) {
-    return _oneEffect(this.dataPack(), input)
+  oneEffect(effectID, extraParameters) {
+    return _oneEffect(this.dataPack(), effectID, extraParameters)
   }
-  dynamic(typeID, itemID) {
-    return _dynamic(this.dataPack(), typeID, itemID)
+  dynamic(typeID, itemID, extraParameters) {
+    return _dynamic(this.dataPack(), typeID, itemID, extraParameters)
   }
 }

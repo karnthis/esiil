@@ -3,17 +3,17 @@
 const { _makePublicGet } = require('../Core')
 const { basePath } = require('./corpHelper')
 
-function _one(dataPack, corporationID) {
-  return _makePublicGet(dataPack, `${basePath}/${corporationID}/`)
+function _one(dataPack, corporationID, extraParams) {
+  return _makePublicGet(dataPack, `${basePath}/${corporationID}/`, extraParams)
 }
-function _allianceHistory(dataPack, corporationID) {
-  return _makePublicGet(dataPack, `${basePath}/${corporationID}/alliancehistory/`)
+function _allianceHistory(dataPack, corporationID, extraParams) {
+  return _makePublicGet(dataPack, `${basePath}/${corporationID}/alliancehistory/`, extraParams)
 }
-function _images(dataPack, corporationID) {
-  return _makePublicGet(dataPack, `${basePath}/${corporationID}/icons/`)
+function _images(dataPack, corporationID, extraParams) {
+  return _makePublicGet(dataPack, `${basePath}/${corporationID}/icons/`, extraParams)
 }
-function _npc(dataPack) {
-  return _makePublicGet(dataPack, `${basePath}/npccorps/`)
+function _npc(dataPack, extraParams) {
+  return _makePublicGet(dataPack, `${basePath}/npccorps/`, extraParams)
 }
 
 module.exports = { _one, _allianceHistory, _images, _npc }
