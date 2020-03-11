@@ -1,4 +1,4 @@
-# ESIIL | ESI Interface Library
+# ESIIL | ESI Interface Library | **BETA 0.3.x**
 ## About ESIIL
 ESIIL was created to simplify use of the EVE Swagger Interface API, and offers access to both Public and Authenticated routes. It is currently a work in progress, and not all routes are implemented. 
 
