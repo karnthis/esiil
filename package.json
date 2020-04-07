@@ -1,11 +1,10 @@
 {
   "name": "esiil",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Single dependency library for EVE Online's ESI *Beta*",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "trial": "node ./attempt.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -18,7 +17,7 @@
   ],
   "author": "Erin Rivas <me@erinrivas.com>",
   "homepage": "https://github.com/karnthis/esiil#readme",
-	"bugs": "https://github.com/karnthis/esiil/issues",
+  "bugs": "https://github.com/karnthis/esiil/issues",
   "license": "MIT",
   "readmeFilename": "readme.md",
   "dependencies": {

@@ -69,7 +69,7 @@ app.get('/mylp', async (req, res) => {
 
 /**
  * 
- * All functions accept a final parameter of an object
+ * All functions accept a final argument of an object
  * containing one or more extra query parameters the user
  * wishes to append to their request. For example below
  * we are requesting page 2 of the assets list.
