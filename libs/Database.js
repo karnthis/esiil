@@ -17,7 +17,7 @@ module.exports = class SQLEngine {
     } else {
     }
     const { Database } = SQLite.verbose()
-    if (false && cfg.mode == 'memory') {
+    if (cfg.mode == 'memory') {
       this.db = new Database(':memory:', (err) => {
         if (err) return console.error(err.message);
         else console.log('Connected to the in-memory SQLite database.');

@@ -74,7 +74,7 @@ function _initDB(db) {
   db.serialize(() => {
     // this.db.run("CREATE TABLE IF NOT EXISTS test_cache (path TEXT, res BLOB, stamp INTEGER)")
     // this.db.run("CREATE TABLE IF NOT EXISTS configs (key TEXT NOT NULL, value BLOB NOT NULL, stamp INTEGER)")
-  db.run("CREATE TABLE IF NOT EXISTS users (char_id BIGINT NOT NULL PRIMARY KEY, toon_name TEXT NOT NULL, access_token TEXT NOT NULL, expires INTEGER NOT NULL, refresh_token TEXT NOT NULL, scope TEXT)")
+    db.run("CREATE TABLE IF NOT EXISTS users (char_id BIGINT NOT NULL PRIMARY KEY, toon_name TEXT NOT NULL, access_token TEXT NOT NULL, expires INTEGER NOT NULL, refresh_token TEXT NOT NULL, scope TEXT)")
     db.run("CREATE TABLE IF NOT EXISTS scopes (scope_id INTEGER NOT NULL PRIMARY KEY, scope_value TEXT NOT NULL)")
     db.run(_scopeSQL)
   })
