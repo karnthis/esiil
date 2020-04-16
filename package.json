@@ -1,6 +1,6 @@
 {
   "name": "esiil",
-  "version": "0.3.1",
+  "version": "0.3.2-beta.0",
   "description": "Single dependency library for EVE Online's ESI *Beta*",
   "main": "index.js",
   "scripts": {
