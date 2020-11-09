@@ -76,7 +76,7 @@ class CoreClass {
         this.requestURL = _buildRequestURL(this.authBundle)
       }
     }
-    
+
   }
 }
 
@@ -104,6 +104,7 @@ async function _makeAuthedGet(dataPack, path, toonID, extraParams = {}) {
   }
   return _sendPathRequest(path, extraParams, options, dataPack)
 }
+
 async function _makeAuthedPost(dataPack, path, payload, toonID, extraParams = {}) {
   const access_token = await _findToken(dataPack, toonID)
   const options = {

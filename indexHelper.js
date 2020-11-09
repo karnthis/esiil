@@ -52,8 +52,12 @@ async function _processAuthToken(bundle, authToken = '') {
     console.error(err)
     throw new Error(err)
   })
-  bundle.db.saveNewToken({ expiration, access_token, refresh_token, CharacterID, CharacterName, Scopes })
-  return {toonID: CharacterID}
+  const savedSuccess = bundle.db.saveNewToken({ expiration, access_token, refresh_token, CharacterID, CharacterName, Scopes })
+  if (savedSuccess) {
+    return {toonID: CharacterID}
+  } else {
+    return { expiration, access_token, refresh_token, CharacterID, CharacterName, Scopes }
+  }
 }
 
 module.exports = {

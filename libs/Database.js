@@ -17,31 +17,47 @@ module.exports = class SQLEngine {
     } else {
     }
     const { Database } = SQLite.verbose()
-    if (false && cfg.mode == 'memory') {
+    if (false && cfg.mode === 'memory') {
       this.db = new Database(':memory:', (err) => {
-        if (err) return console.error(err.message);
-        else console.log('Connected to the in-memory SQLite database.');
+        if (err) {
+          return console.error(err.message);
+        }
+        else {
+          console.log('Connected to the in-memory SQLite database.');
+        }
       })
+    } else if (cfg.mode === 'external'){
+      this.db = null
+      console.log('Running in External Database mode.');
     } else {
       this.db = new Database(`${dbPath}${dbName}`, (err) => {
-        if (err) return console.error(err.message);
-        else console.log('Connected to the on-disk SQLite database.');
+        if (err) {
+          return console.error(err.message);
+        }
+        else {
+          console.log('Connected to the on-disk SQLite database.');
+        }
       })
     }
     _initDB(this.db)
   }
 
   saveNewToken(data) {
-    const { CharacterName, CharacterID, access_token, expiration, refresh_token, Scopes } = data
-    const sql = 'REPLACE INTO users (toon_name, char_id, access_token, expires, refresh_token, scope) VALUES (?,?,?,?,?,?)'
-    this.db.run(sql, [
-      CharacterName,
-      CharacterID,
-      access_token,
-      expiration,
-      refresh_token,
-      Scopes
-    ], err => console.error(err));
+    if (!this.db) {
+      return false
+    } else {
+      const { CharacterName, CharacterID, access_token, expiration, refresh_token, Scopes } = data
+      const sql = 'REPLACE INTO users (toon_name, char_id, access_token, expires, refresh_token, scope) VALUES (?,?,?,?,?,?)'
+      this.db.run(sql, [
+        CharacterName,
+        CharacterID,
+        access_token,
+        expiration,
+        refresh_token,
+        Scopes
+      ], err => console.error(err));
+      return true
+    }
   }
   saveRefreshedToken(access, expiration, refresh) {
     const sql = 'UPDATE users SET access_token = ?, expires = ? WHERE refresh_token = ?'
