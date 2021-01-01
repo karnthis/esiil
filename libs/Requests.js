@@ -30,17 +30,23 @@ module.exports = {
   },
   _sendTokenRequest(url, options = {}) {
     return _allRequest(url, options)
-  }  
+  }
 }
 
 function _allRequest(url, options, payload) {
+  // console.log('options:')
+  // console.dir(options)
+  // console.log('payload:')
+  // console.dir(payload)
   return new Promise((resolve, reject) => {
     if (_isURL(url)) {
-      console.log(url)
+      // console.log(url)
       const req = request(url, options, (res) => {
+        // console.log('STATUSCODE: ', res.statusCode)
         res.setEncoding('utf8');
         const resBody = []
         res.on('data', (data) => {
+          // console.log('resDATA: ', data)
           resBody.push(data)
         })
         res.on('end', () => {
