@@ -14,10 +14,9 @@ module.exports = class SQLEngine {
       FS.writeFileSync(`${dbPath}${dbName}`, '', { flag: 'wx' }, function (err) {
         if (err) console.error(err);
       })
-    } else {
-    }
-    const { Database } = SQLite.verbose()
-    if (false && cfg.mode === 'memory') {
+    } else {}
+    if (cfg.mode === 'memory') {
+      const { Database } = SQLite.verbose()
       this.db = new Database(':memory:', (err) => {
         if (err) {
           return console.error(err.message);
@@ -26,10 +25,17 @@ module.exports = class SQLEngine {
           console.log('Connected to the in-memory SQLite database.');
         }
       })
+      this.db.type = 'sqlite'
     } else if (cfg.mode === 'external'){
-      this.db = null
+      this.db = {type: 'external'}
       console.log('Running in External Database mode.');
+      console.log('Not Yet Supported: please use SQLite');
+    } else if (cfg.mode === 'json'){
+      this.db = {type: 'json'}
+      console.log('Running in JSON File mode.');
+      console.log('Not Yet Supported: please use SQLite');
     } else {
+      const { Database } = SQLite.verbose()
       this.db = new Database(`${dbPath}${dbName}`, (err) => {
         if (err) {
           return console.error(err.message);
@@ -38,6 +44,7 @@ module.exports = class SQLEngine {
           console.log('Connected to the on-disk SQLite database.');
         }
       })
+      this.db.type = 'sqlite'
     }
     _initDB(this.db)
   }

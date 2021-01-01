@@ -15,9 +15,9 @@ class CoreClass {
     return {
       tokenOptions: {
         headers: {
-          'Content-Type': 'application/json'
-        },
-        auth: `${this.clientID}:${this.clientSecret}`
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + Buffer.from(`${this.clientID}:${this.clientSecret}`).toString('base64')
+        }
       },
       userAgent: this.userAgent,
       baseURL: this.baseURL,

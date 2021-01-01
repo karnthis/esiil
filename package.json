@@ -1,6 +1,6 @@
 {
   "name": "esiil",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Single dependency library for EVE Online's ESI *Beta*",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,6 @@
   "license": "MIT",
   "readmeFilename": "readme.md",
   "dependencies": {
-    "sqlite3": "^4.1.1"
+    "sqlite3": "^5.0.0"
   }
 }
