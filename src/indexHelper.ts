@@ -6,6 +6,14 @@ import jwkToPem from 'jwk-to-pem'
 import IRequestUrl from "./interfaces/RequestUrl";
 import ITokenResponse from "./interfaces/TokenResponse";
 import IServiceResponse from "./interfaces/ServiceResponse";
+import ITokenResponseBody from "./interfaces/TokenResponse";
+
+type JSONResponse = {
+  data?: {
+    pokemon: Omit<ITokenResponseBody, 'fetchedAt'>
+  }
+  errors?: Array<{message: string}>
+}
 
 function _buildRequestURL(bundle: IRequestUrl) {
   if (bundle.state.includes('&')) console.error(`Request URL state: Must not contain '&' symbol. Sanitizing...`)
@@ -42,22 +50,28 @@ async function _processAuthToken(authToken: string = '') {
 
   const payload = `grant_type=authorization_code&code=${authToken}`
   const myvar: IServiceResponse = await _tokenExchange(payload)
+  console.log('myvar')
   console.dir(myvar)
   // todo - clean up this shit
   let decoded: string | object = {}
   try {
+    if (typeof myvar.body === 'string') {
+      throw new Error(`Not a valid object: ${myvar.body}`)
+    }
     if ("access_token" in myvar.body) {
       // @ts-ignore
       const newkey = jwkToPem(tempkey2)
       decoded = jwt.verify(myvar.body.access_token, newkey, {algorithms: ['RS256']})
     }
   } catch (err) {
+    console.log('err')
     console.log(err)
   }
 
 
 
 
+  console.log('decoded')
   console.log(decoded)
   return myvar
 

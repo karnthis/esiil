@@ -16,7 +16,7 @@ class CoreClass {
   public clientSecret: string;
   public domainAndVersion: string;
   public queryParamStart: string;
-  public requestURL: string;
+  public loginRequestURL: string;
 
   constructor(cfg: IInstanceConfig) {
     this.scopes = cfg.scopes || []
@@ -30,9 +30,9 @@ class CoreClass {
     this.domainAndVersion = Defaults.domainAndVersion()
     this.queryParamStart = Defaults.queryParamStart()
 
-    this.requestURL = _buildRequestURL({
+    this.loginRequestURL = _buildRequestURL({
       scopes: this.scopes,
-      state: this.state,
+      state: 'login',
       callbackURL: this.callbackURL,
       clientID: this.clientID
     })
@@ -46,7 +46,7 @@ class CoreClass {
       callbackURL: this.callbackURL,
       clientID: this.clientID,
       clientSecret: this.clientSecret,
-      requestURL: this.requestURL,
+      requestURL: this.loginRequestURL,
     }
   }
 
@@ -55,6 +55,15 @@ class CoreClass {
       userAgent: this.userAgent,
       scopes: this.scopes,
     }
+  }
+
+  scopeRequest(scopes: string[], state: string) {
+    return _buildRequestURL({
+      scopes: scopes,
+      state: state,
+      callbackURL: this.callbackURL,
+      clientID: this.clientID
+    })
   }
 }
 

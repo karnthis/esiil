@@ -5,3 +5,6 @@ esiil_db/
 dist/
 
 attempt.js
+.DS_Store
+
+.idea/

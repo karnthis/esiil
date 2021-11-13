@@ -26,7 +26,7 @@ class ESIIL extends Core.CoreClass {
     }
 
     authRequestURL() {
-        return this.requestURL
+        return this.loginRequestURL
     }
     receiveAuthCode(authCode: string) {
         return _processAuthToken(authCode)

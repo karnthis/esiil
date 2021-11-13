@@ -1,8 +1,10 @@
 import Defaults from '../defaults'
 import { _sendTokenRequest } from '../libs/Fetchd'
 import ISendTokenOpts from "../interfaces/SendTokenOpts";
+import ITokenResponseBody from "../interfaces/TokenResponse";
+import IServiceResponse from "../interfaces/ServiceResponse";
 
-function _tokenExchange(payload: string) {
+function _tokenExchange(payload: string): Promise<IServiceResponse> {
   const sendOpts: ISendTokenOpts = {
     method: 'POST',
     headers: {

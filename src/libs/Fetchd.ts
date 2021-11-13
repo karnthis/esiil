@@ -46,8 +46,8 @@ function _sendTokenRequest(url: string, options: RequestInit, payload: string) {
 
 
 function doFetch(url: string, options: RequestInit): Promise<IServiceResponse> {
-    return fetch(url, options)
-        .then(resp => {
+    const result = fetch(url, options)
+        .then(async resp => {
             const serviceResponse: IServiceResponse = {
                 body: {},
                 headers: resp.headers.raw(),
@@ -55,13 +55,14 @@ function doFetch(url: string, options: RequestInit): Promise<IServiceResponse> {
                 statusText: resp.statusText,
             }
             if (resp.headers.get('Content-Type') == 'application/json; charset=utf-8') {
-                serviceResponse.body = resp.json()
+                serviceResponse.body = await resp.json()
                 return serviceResponse
             } else {
-                serviceResponse.body = resp.text()
+                serviceResponse.body = await resp.text()
                 return serviceResponse
             }
         })
+    return result
 }
 
 
