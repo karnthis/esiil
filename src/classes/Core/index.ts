@@ -2,10 +2,8 @@ import IInstanceConfig from "../../interfaces/InstanceConfig";
 
 import Defaults from '../../defaults'
 import {_basicGet, _sendPathRequest} from'../../libs/Fetchd'
-import { _buildRequestURL } from './coreHelper'
-import IDataPack from "../../interfaces/DataPack";
+import { _buildRequestURL, _loadCcpJwt } from './coreHelper'
 import IExtraParametersWithSig from "../../interfaces/ExtraParametersWithSig";
-
 
 class CoreClass {
   public scopes: string[];
@@ -16,6 +14,7 @@ class CoreClass {
   public clientSecret: string;
   public domainAndVersion: string;
   public queryParamStart: string;
+  public ccpJwt: object;
   public loginRequestURL: string;
 
   constructor(cfg: IInstanceConfig) {
@@ -30,12 +29,19 @@ class CoreClass {
     this.domainAndVersion = Defaults.domainAndVersion()
     this.queryParamStart = Defaults.queryParamStart()
 
+    this.ccpJwt = {};
+    this.loadCcpJwt();
+
     this.loginRequestURL = _buildRequestURL({
       scopes: this.scopes,
       state: 'login',
       callbackURL: this.callbackURL,
       clientID: this.clientID
     })
+  }
+
+  async loadCcpJwt() {
+    this.ccpJwt = await _loadCcpJwt()
   }
 
   clone() {

@@ -29,7 +29,7 @@ class ESIIL extends Core.CoreClass {
         return this.loginRequestURL
     }
     receiveAuthCode(authCode: string) {
-        return _processAuthToken(authCode)
+        return _processAuthToken(authCode, this.ccpJwt)
     }
 
     newAlliance() {

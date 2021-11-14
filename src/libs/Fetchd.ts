@@ -6,7 +6,6 @@ import IExtraParametersWithSig from "../interfaces/ExtraParametersWithSig";
 import ISendTokenOpts from "../interfaces/SendTokenOpts";
 import IServiceResponse from "../interfaces/ServiceResponse";
 
-
 function _basicGet(path: string, extraParams: IExtraParametersWithSig) {
     const options = {
         method: 'GET',
@@ -44,12 +43,27 @@ function _sendTokenRequest(url: string, options: RequestInit, payload: string) {
     return doFetch(url, sendOpts)
 }
 
+function _jwtGet() {
+    const options = {
+        method: 'GET',
+        headers: {
+            'User-Agent': Defaults.userAgent
+        }
+    }
+    return doFetch('https://login.eveonline.com/oauth/jwks', options)
+}
+
 
 function doFetch(url: string, options: RequestInit): Promise<IServiceResponse> {
     const result = fetch(url, options)
         .then(async resp => {
             const serviceResponse: IServiceResponse = {
-                body: {},
+                body: {
+                    access_token: '',
+                    expires_in: 0,
+                    token_type: '',
+                    refresh_token: '',
+                },
                 headers: resp.headers.raw(),
                 status: resp.status,
                 statusText: resp.statusText,
@@ -72,5 +86,6 @@ export {
     _sendPathRequest,
     _sendCustomRequest,
     _sendTokenRequest,
+    _jwtGet,
     doFetch
 }
