@@ -5,5 +5,4 @@ export default interface IInstanceConfig {
     callbackURL: string
     clientID: string
     clientSecret: string
-    requestURL: string
 }

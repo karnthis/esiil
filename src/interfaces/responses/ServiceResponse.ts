@@ -1,7 +1,7 @@
-import ITokenResponseBody from "./TokenResponse";
+import ITokenResponseBody from "./TokenResponseBody";
 
 export default interface IServiceResponse {
-    body: ITokenResponseBody | string
+    body: object | string
     headers: object
     statusText: string
     status: number

@@ -1,4 +1,4 @@
-import { _processAuthToken } from './indexHelper'
+import { _processAuthToken, _refreshTheToken, _reduceScope } from './indexHelper'
 
 import Core from './classes/Core'
 
@@ -25,11 +25,20 @@ class ESIIL extends Core.CoreClass {
         super(cfg)
     }
 
-    authRequestURL() {
-        return this.loginRequestURL
+    defaultAuthRequestURL() {
+        return this.defaultRequestURL()
+    }
+    targetedAuthRequestURL() {
+        return this.targetedRequestURL()
     }
     receiveAuthCode(authCode: string) {
         return _processAuthToken(authCode, this.ccpJwt)
+    }
+    refreshAuthCode(refreshToken: string) {
+        return _refreshTheToken(refreshToken, this.ccpJwt)
+    }
+    reduceScope(refreshToken: string, updatedScopes: string[]) {
+        return _reduceScope(refreshToken, this.ccpJwt, updatedScopes)
     }
 
     newAlliance() {

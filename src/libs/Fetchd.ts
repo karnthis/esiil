@@ -4,28 +4,30 @@ import ISendOpts from "../interfaces/SendOpts";
 import {_cleanURL, _paramsToString} from './FetchdHelpers'
 import IExtraParametersWithSig from "../interfaces/ExtraParametersWithSig";
 import ISendTokenOpts from "../interfaces/SendTokenOpts";
-import IServiceResponse from "../interfaces/ServiceResponse";
+import IServiceResponse from "../interfaces/responses/ServiceResponse";
+import ITokenServiceResponse from "../interfaces/responses/TokenServiceResponse";
+import ICcpJwtServiceResponse from "../interfaces/responses/CcpJwtServiceResponse";
 
-function _basicGet(path: string, extraParams: IExtraParametersWithSig) {
+function _basicGet(path: string, extraParams: IExtraParametersWithSig): Promise<IServiceResponse> {
     const options = {
         method: 'GET',
         headers: {
             'User-Agent': Defaults.userAgent
         }
     }
-    const url = `${Defaults.domainAndVersion}${_cleanURL(path)}${Defaults.queryParamStart}${_paramsToString(extraParams)}`
+    const url = `${Defaults.domainAndVersion()}${_cleanURL(path)}${Defaults.queryParamStart()}${_paramsToString(extraParams)}`
     return doFetch(url, options)
 }
-function _sendPathRequest(path: string, extraParams: IExtraParametersWithSig, options: RequestInit, payload?: object) {
+function _sendPathRequest(path: string, extraParams: IExtraParametersWithSig, options: RequestInit, payload?: object): Promise<IServiceResponse> {
     const sendOpts: ISendOpts = {
         method: options.method || 'GET',
         headers: {...options.headers, ...{'User-Agent': Defaults.userAgent}},
     }
     if (payload) sendOpts.body = JSON.stringify(payload)
-    const url: string = `${Defaults.domainAndVersion}${_cleanURL(path)}${Defaults.queryParamStart}${_paramsToString(extraParams)}`
+    const url: string = `${Defaults.domainAndVersion()}${_cleanURL(path)}${Defaults.queryParamStart()}${_paramsToString(extraParams)}`
     return doFetch(url, sendOpts)
 }
-function _sendCustomRequest(url: string, options: RequestInit, payload: object = {}) {
+function _sendCustomRequest(url: string, options: RequestInit, payload: object = {}): Promise<IServiceResponse> {
     const sendOpts: ISendOpts = {
         method: options.method || 'GET',
         headers: {...options.headers, ...{'User-Agent': Defaults.userAgent}},
@@ -34,23 +36,23 @@ function _sendCustomRequest(url: string, options: RequestInit, payload: object =
     return doFetch(url, sendOpts)
 }
 
-function _sendTokenRequest(url: string, options: RequestInit, payload: string) {
+async function _sendTokenRequest(url: string, options: RequestInit, payload: string): Promise<ITokenServiceResponse> {
     const sendOpts: ISendTokenOpts = {
         method: 'POST',
         headers: {...options.headers, ...{'User-Agent': Defaults.userAgent}},
         body: payload,
     }
-    return doFetch(url, sendOpts)
+    return await doFetch(url, sendOpts) as ITokenServiceResponse
 }
 
-function _jwtGet() {
+async function _jwtGet(): Promise<ICcpJwtServiceResponse> {
     const options = {
         method: 'GET',
         headers: {
             'User-Agent': Defaults.userAgent
         }
     }
-    return doFetch('https://login.eveonline.com/oauth/jwks', options)
+    return await doFetch('https://login.eveonline.com/oauth/jwks', options) as ICcpJwtServiceResponse
 }
 
 
