@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## Major Releases:
+### [v1.0.0] | 2021 11 16
+#### Notes Coming Soon
+
 ### [v0.3.0] | 2020 3 11
 #### Added
 - Support for additional Request query parameters
@@ -31,7 +34,8 @@ None Yet
 
 <!-- LINKS -->
 <!-- RELEASES -->
-[Unreleased]: https://github.com/karnthis/make-random/compare/v0.3.0...dev
+[Unreleased]: https://github.com/karnthis/make-random/compare/v1.0.0...dev
+[v1.0.0]: https://github.com/karnthis/make-random/compare/v0.3.0...v1.0.0
 [v0.3.0]: https://github.com/karnthis/make-random/compare/v0.2.0...v0.3.0
 [v0.2.0]: https://github.com/karnthis/make-random/compare/v0.1.0...v0.2.0
 [v0.1.0]: https://github.com/karnthis/make-random/tag/v0.1.0

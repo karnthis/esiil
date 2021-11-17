@@ -1,4 +1,4 @@
-# ESIIL | ESI Interface Library | **BETA 0.3.x**
+# ESIIL | ESI Interface Library | v1.0.0
 ## About ESIIL
 ESIIL was created to simplify use of the EVE Swagger Interface API, and offers access to both Public and Authenticated routes. It is currently a work in progress, and not all routes are implemented. 
 
@@ -10,6 +10,8 @@ If you find an ESI route you want to use and is not available yet, please [open 
 ```shell
 npm install esiil
 ```
+## DISREGARD EVERYTHING BELOW THIS POINT. UPDATED GUIDE COMING SOON
+
 ### Example Express API
 ```javascript
 const Express = require('express')
