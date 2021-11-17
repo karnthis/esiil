@@ -1,0 +1,30 @@
+export default interface IExtraParameters {
+    add_to_beginning?: boolean
+    avoid?: number[]
+    categories?: string[]
+    clear_other_waypoints?: boolean
+    connections?: [][]
+    contact_ids?: number[]
+    contract_id?: number
+    destination_id?: number
+    filter?: string
+    flag?: string
+    from_event?: number
+    from_id?: number
+    include_completed?: boolean
+    label_ids?: number[]
+    labels?: number[]
+    language?: string
+    last_mail_id?: number
+    max_war_id?: number
+    order_type?: string
+    page?: number
+    search?: string
+    standing?: number
+    strict?: boolean
+    system_id?: number
+    target_id?: number
+    token?: string
+    type_id?: number
+    watched?: boolean
+}
