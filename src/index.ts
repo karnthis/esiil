@@ -25,11 +25,11 @@ class ESIIL extends Core.CoreClass {
         super(cfg)
     }
 
-    defaultAuthRequestURL() {
-        return this.defaultRequestURL()
+    defaultAuthRequestURL(state: string) {
+        return this.defaultRequestURL(state)
     }
-    targetedAuthRequestURL() {
-        return this.targetedRequestURL()
+    targetedAuthRequestURL(state: string, scopes: string[]) {
+        return this.targetedRequestURL(state, scopes)
     }
     receiveAuthCode(authCode: string) {
         return _processAuthToken(authCode, this.ccpJwt)

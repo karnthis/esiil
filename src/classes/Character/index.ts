@@ -2,6 +2,7 @@ import Core from '../Core'
 import {basePath} from "./characterHelper";
 import IInstanceConfig from "../../interfaces/InstanceConfig";
 import IExtraParametersWithSig from "../../interfaces/ExtraParametersWithSig";
+import ILpServiceResponse from "../../interfaces/responses/character/LpServiceResponse";
 
 export default class Character extends Core.CoreClass {
   constructor(cfg: IInstanceConfig) {
@@ -66,8 +67,8 @@ export default class Character extends Core.CoreClass {
   implants(characterID: number, sessionToken: string, extraParameters: IExtraParametersWithSig) {
     return Core._makeAuthedGet(`${basePath}/${characterID}/implants/`, sessionToken, extraParameters)
   }
-  lp(characterID: number, sessionToken: string, extraParameters: IExtraParametersWithSig) {
-    return Core._makeAuthedGet(`${basePath}/${characterID}/loyalty/points/`, sessionToken, extraParameters)
+  async lp(characterID: number, sessionToken: string, extraParameters: IExtraParametersWithSig): Promise<ILpServiceResponse> {
+    return await Core._makeAuthedGet(`${basePath}/${characterID}/loyalty/points/`, sessionToken, extraParameters) as ILpServiceResponse
   }
   medals(characterID: number, sessionToken: string, extraParameters: IExtraParametersWithSig) {
     return Core._makeAuthedGet(`${basePath}/${characterID}/medals/`, sessionToken, extraParameters)
