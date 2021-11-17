@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 if (dotenv) dotenv.config()
 
 export default class CoreDefaults {
-  static userAgent: string = process.env.UserAgent || 'ESIIL-Default/0.x.x'
+  static userAgent: string = process.env.UserAgent || 'ESIIL-Default/1.0.x'
   static baseURL: string = 'https://esi.evetech.net/'
   static version: string = 'latest/'
   static source: string = 'tranquility'
