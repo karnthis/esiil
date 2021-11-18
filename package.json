@@ -1,7 +1,7 @@
 {
   "name": "esiil",
   "version": "1.0.0",
-  "description": "Minimalist library for EVE Online's ESI *Beta*",
+  "description": "Minimalist library for EVE Online's ESI",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
