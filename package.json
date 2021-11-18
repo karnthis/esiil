@@ -6,6 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc && npm pack",
+    "patch": "tsc && npm version patch && npm publish",
     "test": "jest",
     "trial": "node ./attempt.js"
   },
