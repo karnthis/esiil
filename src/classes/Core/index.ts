@@ -65,12 +65,9 @@ class CoreClass {
 
   clone(): IInstanceConfig {
     return {
-      userAgent: this.userAgent,
       scopes: this.scopes,
       state: this.state,
       callbackURL: this.callbackURL,
-      clientID: this.clientID,
-      clientSecret: this.clientSecret,
     }
   }
 
