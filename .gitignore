@@ -1,8 +1,6 @@
 node_modules/
-data/
-esiio_db/
-esiil_db/
 dist/
+packs/
 
 attempt.js
 .DS_Store
