@@ -3,6 +3,13 @@ import {basePath} from "./characterHelper";
 import IInstanceConfig from "../../interfaces/InstanceConfig";
 import IExtraParametersWithSig from "../../interfaces/ExtraParametersWithSig";
 import ILpServiceResponse from "../../interfaces/responses/character/LpServiceResponse";
+import IWalletBalanceServiceResponse from "../../interfaces/responses/corp/WalletBalanceServiceResponse";
+import IWalletJournalServiceResponse from "../../interfaces/responses/corp/WalletJournalServiceResponse";
+import IWalletTransactionServiceResponse from "../../interfaces/responses/corp/WalletTransactionServiceResponse";
+import IPersonalBalanceServiceResponse from "../../interfaces/responses/character/PersonalBalanceServiceResponse";
+import IPersonalJournalServiceResponse from "../../interfaces/responses/character/PersonalJournalServiceResponse";
+import IPersonalTransactionServiceResponse
+  from "../../interfaces/responses/character/PersonalTransactionServiceResponse";
 
 export default class Character extends Core.CoreClass {
   constructor(cfg: IInstanceConfig) {
@@ -102,6 +109,15 @@ export default class Character extends Core.CoreClass {
   }
   titles(characterID: number, sessionToken: string, extraParameters: IExtraParametersWithSig) {
     return Core._makeAuthedGet(`${basePath}/${characterID}/titles/`, sessionToken, extraParameters)
+  }
+  async walletBalance(characterID: number, sessionToken: string, extraParameters?: IExtraParametersWithSig): Promise<IPersonalBalanceServiceResponse> {
+    return await Core._makeAuthedGet(`${basePath}/${characterID}/wallet/`, sessionToken, extraParameters) as IPersonalBalanceServiceResponse
+  }
+  async walletJournal(characterID: number, sessionToken: string, extraParameters?: IExtraParametersWithSig): Promise<IPersonalJournalServiceResponse> {
+    return await Core._makeAuthedGet(`${basePath}/${characterID}/wallet/journal`, sessionToken, extraParameters) as IPersonalJournalServiceResponse
+  }
+  async walletTransactions(characterID: number, sessionToken: string, extraParameters?: IExtraParametersWithSig): Promise<IPersonalTransactionServiceResponse> {
+    return await Core._makeAuthedGet(`${basePath}/${characterID}/wallet/transactions`, sessionToken, extraParameters) as IPersonalTransactionServiceResponse
   }
   
   getContacts(characterID: number, sessionToken: string, extraParameters: IExtraParametersWithSig) {

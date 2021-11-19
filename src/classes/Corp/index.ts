@@ -3,6 +3,10 @@ import {basePath} from "./corpHelper";
 import IInstanceConfig from "../../interfaces/InstanceConfig";
 import IExtraParametersWithSig from "../../interfaces/ExtraParametersWithSig";
 
+import IWalletBalanceServiceResponse from "../../interfaces/responses/corp/WalletBalanceServiceResponse";
+import IWalletJournalServiceResponse from "../../interfaces/responses/corp/WalletJournalServiceResponse";
+import IWalletTransactionServiceResponse from "../../interfaces/responses/corp/WalletTransactionServiceResponse";
+
 export default class Corp extends Core.CoreClass {
   constructor(cfg: IInstanceConfig) {
     super(cfg)
@@ -104,5 +108,14 @@ export default class Corp extends Core.CoreClass {
   }
   titles(corporationID: number, sessionToken: string, extraParameters: IExtraParametersWithSig) {
     return Core._makeAuthedGet(`${basePath}/${corporationID}/titles/`, sessionToken, extraParameters)
+  }
+  async walletAllBalances(corporationID: number, sessionToken: string, extraParameters?: IExtraParametersWithSig): Promise<IWalletBalanceServiceResponse> {
+    return await Core._makeAuthedGet(`${basePath}/${corporationID}/wallets/`, sessionToken, extraParameters) as IWalletBalanceServiceResponse
+  }
+  async walletJournal(corporationID: number, divisionID: number, sessionToken: string, extraParameters?: IExtraParametersWithSig): Promise<IWalletJournalServiceResponse> {
+    return await Core._makeAuthedGet(`${basePath}/${corporationID}/wallets/${divisionID}/journal`, sessionToken, extraParameters) as IWalletJournalServiceResponse
+  }
+  async walletTransactions(corporationID: number, divisionID: number, sessionToken: string, extraParameters?: IExtraParametersWithSig): Promise<IWalletTransactionServiceResponse> {
+    return await Core._makeAuthedGet(`${basePath}/${corporationID}/wallets/${divisionID}/transactions`, sessionToken, extraParameters) as IWalletTransactionServiceResponse
   }
 }
